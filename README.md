@@ -1,1 +1,0 @@
-# sgmath12.github.io
