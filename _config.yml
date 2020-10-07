@@ -35,3 +35,6 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - minima-reboot.gemspec
+
+url : "https://sgmath12.github.io"
+baseurl : ""
