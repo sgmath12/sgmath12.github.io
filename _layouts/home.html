@@ -23,10 +23,10 @@ layout: default
         <h1 class="mt-1 mb-3 h3">
           <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
         </h1>
-
-        <div class="text-justify">
+<!-- remove summary words>
+<!--         <div class="text-justify">
           {{ post.excerpt }}
-        </div>
+        </div> -->
       </li>
     {% endfor %}
   </ul>
