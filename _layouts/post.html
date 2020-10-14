@@ -26,6 +26,13 @@ layout: default
   <div class="text-justify" itemprop="articleBody" id="content">
     {{ content }}
   </div>
+  
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/math...">
+  </script>
+
 
   {% if site.disqus.shortname %}
     {% include disqus_comments.html %}
