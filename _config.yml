@@ -36,5 +36,8 @@ exclude:
   - Gemfile.lock
   - minima-reboot.gemspec
 
+kramdown:  
+  parse_block_html: true
+  
 url : "https://sgmath12.github.io"
 baseurl : ""
