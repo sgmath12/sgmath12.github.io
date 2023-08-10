@@ -1,6 +1,6 @@
 # 오답노트
 
-실전 매매를 통해 전략을 튜닝한다.
+실전 매매/모의 매매를 통해 전략을 튜닝한다.
 
 ## 23-08-10
 
@@ -10,4 +10,66 @@
 
 약간 두 개의 종목이 공통점이 있는데, 모두 8/9 일 전에 큰 상승이 있었다는 것이다.
 
-<img src="https://github.com/sgmath12/sgmath12.github.io/assets/21999383/383f38a6-6973-4e49-a5bd-ad98046a9ea1" width="400" style="margin-left: auto; margin-right: auto; display: block;"/>
+<img src="https://github.com/sgmath12/Stock_analysis/assets/21999383/eb7c92e8-e77e-49c9-b248-f134def08d38" width="300" style="margin-left: auto; margin-right: auto; display: block;"/>
+
+<br>
+
+재밌는것은 유아이엘의 경우 7/28에 관심종목에 올랐었을 것고, 따라서 7/31 혹은 8/1에 매수 해도 됐었을 수도 있다. (지금 알고리즘에선 매수하지 않았다)
+
+
+
+<img src="https://github.com/sgmath12/sgmath12.github.io/assets/21999383/cbb47520-4122-4403-a56e-bf459a47fc4d" width="300" style="margin-left: auto; margin-right: auto; display: block;"/>
+
+<br>
+
+하지만 관심종목에 올랐어도, `price` 가 `at_time_price` 보다 작아 매수 리스트까진 가진 못했을 것이다. 
+
+````
+condition = rate < config.w6 and rate > config.w7  and price < at_time_price
+````
+하지만 저런 경우에 만약 `price < at_time_price` 조건이 너무 타이트 하다고 생각되고, 실제로 이 때 매수를 하지 않은 것이 결국은 오늘 (8/10) 의 손실을 더 크게 가져왔으므로, 전략을 다음과 같이 수정할 수 있다. 
+
+
+````
+condition = rate < config.w6 and rate > config.w7  and price < 1.05 * at_time_price
+````
+
+`at_time_price` 를 너무 강하게 넘지만 않는다면 매수하는 조건으로 좀 더 풀어줬다. 저 1.05 라는 숫자도 튜닝해볼 수 있을 것이다 ....
+
+일단 이렇게 하면 `E` 가 줄어들어도 최근 전적에서 더 많은 `Net`을 가져온다는 것을 확인했다. 
+
+궁금해서 `2020-02-04` 부터 돌려봤다. 
+
+````
+기존 방법
+win : 2267, lose : 671, win_rate : 77.16
+New_Expection : 0.69,
+New_Net : 2040.48,
+
+뉴 방법
+
+win : 4527, lose : 1307, win_rate : 77.60
+New_Expection : 0.54,
+New_Net : 3169.06,
+
+
+`````
+
+`E` 가 줄어들었지만 `Net` 이 늘어난 것을 확인할 수 있다. 
+거래횟수가 크게 증가한 덕분이다. 
+
+````
+E = win_rate * 평균이득률 + (1-win_Rate)* 평균손실률
+Net = E * 거래횟수
+
+``````
+
+내가 만약 조건을 타이트하게 해서 `E` 를 극대화 한다고하더라도, 거래횟수가 적다면 `Net` 이 적을 것이다. 
+
+### 생각
++ 근데 생각해보니 애초에 실험 세팅에서도 `upper` 와 `lower` 를 각각 4와 -8로 설정해두었기 때문에 알고리즘대로 잘 판 걸 수도 있다. 
+
++ 근데 또 완전히 엄밀하게 들어가자면 시가에 -8이 아니였고 직접 손매매로 -8을 찍을 때 손절을 해버린것이기 때문에 시스템을 따른것은 아니다. 시스템대로였다면 무려 다음날 시가에 팔아야하기 때문에, `와이엔텍`의 경우 글을 쓰는 지금 기준 -13%를 찍고 있기 때문에, 내일도 아마 비슷하게 팔릴것이다 ㄷㄷ
+
++ 하지만 또 반대로, `유아이엘` 의 경우 장 마지막에 말아올려 -3%를 찍고 있기 때문에, 내일 팔아도 오늘 판 것보단 손실이 덜할 것이다. 
+
