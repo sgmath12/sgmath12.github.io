@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-Seungju
+Seungju Cho
 
 **PhD** (Ongoing) Korea Advanced Institute of Science and Technology (KAIST), Major in Electric Engineering *Mar 2021*
 
