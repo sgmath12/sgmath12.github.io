@@ -10,4 +10,4 @@
 
 약간 두 개의 종목이 공통점이 있는데, 모두 8/9 일 전에 큰 상승이 있었다는 것이다.
 
-<img src="https://github.com/sgmath12/Stock_analysis/assets/21999383/eb7c92e8-e77e-49c9-b248-f134def08d38" width="400" style="margin-left: auto; margin-right: auto; display: block;"/>
+<img src="https://github.com/sgmath12/sgmath12.github.io/assets/21999383/383f38a6-6973-4e49-a5bd-ad98046a9ea1" width="400" style="margin-left: auto; margin-right: auto; display: block;"/>
