@@ -5,7 +5,7 @@ permalink: /about/
 ---
 
 Seungju
-**PhD (Ongoing)** Korea Advanced Institute of Science and Technology (KAIST), Major in Electric Engineering *Mar 2021*
+**PhD ** (Ongoing) Korea Advanced Institute of Science and Technology (KAIST), Major in Electric Engineering *Mar 2021*
 
 **MS** Korea Advanced Institute of Science and Technology (KAIST), Major in Computer Science *Aug 2020*
 
