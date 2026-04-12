@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<header class="pt-3 mb-3">
+<header class="pt-4 mb-3">
   {{ content }}
 </header>
 
@@ -17,36 +17,33 @@ layout: default
   <ul class="list-unstyled m-0">
     {% assign date_format = site.minima_reboot.date_format | default: "%b %-d, %Y" %}
     {% for post in posts %}
-      <li class="py-2">
-        <span class="text-secondary">{{ post.date | date: date_format }}</span>
-
-        <h1 class="mt-1 mb-3 h3">
-          <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-        </h1>
-<!-- remove summary words>
-<!--         <div class="text-justify">
-          {{ post.excerpt }}
-        </div> -->
+      <li class="post-list-item">
+        <time class="post-meta-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: date_format }}</time>
+        <a class="post-title-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
       </li>
     {% endfor %}
   </ul>
 
   {% if site.paginate %}
-  <nav class="py-1" aria-label="Blog page navigation">
+  <nav class="py-2" aria-label="Blog page navigation">
     {% if paginator.previous_page %}
-      <a href="{{ paginator.previous_page_path | relative_url }}">&laquo; Previous</a>
+      <a href="{{ paginator.previous_page_path | relative_url }}">&laquo; Newer</a>
     {% endif %}
-
-    Page: {{ paginator.page }} of {{ paginator.total_pages }}
-
+    {% if paginator.previous_page and paginator.next_page %}
+      <span class="mx-2" style="color:#d1d5db">·</span>
+    {% endif %}
+    <span>Page {{ paginator.page }} / {{ paginator.total_pages }}</span>
     {% if paginator.next_page %}
-      <a href="{{ paginator.next_page_path | relative_url }}">Next &raquo;</a>
+      <span class="mx-2" style="color:#d1d5db">·</span>
+      <a href="{{ paginator.next_page_path | relative_url }}">Older &raquo;</a>
     {% endif %}
   </nav>
   {% endif %}
 
   {% if site.plugins contains "jekyll-feed" %}
-    <a href="{{ "/feed.xml" | relative_url }}"><div id="rss-icon" class="mb-2"></div></a>
+    <a href="{{ "/feed.xml" | relative_url }}" class="d-inline-block mt-3" title="RSS Feed">
+      <div id="rss-icon"></div>
+    </a>
   {% endif %}
 
 </div>
