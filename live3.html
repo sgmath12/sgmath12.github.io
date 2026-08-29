@@ -1,0 +1,1878 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trophy 서브 리포트</title>
+<meta name="description" content="2024 US Open 남자 프로 3,149서브 분포 대비 서브 자세 분석.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%BE%3C/text%3E%3C/svg%3E">
+<style>
+  :root { color-scheme: light; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; padding: 0; font: 14px -apple-system, BlinkMacSystemFont, sans-serif;
+         background: #faf9f5; color: #141413; }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@450;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+
+<style>
+  :root {
+    color-scheme: light;
+    --ground:     #EBEFEF;
+    --surface:    #FFFFFF;
+    --surface-2:  #F3F6F6;
+    --line:       #D2DBDF;
+    --line-soft:  #E3E9EB;
+    --ink:        #0E2331;
+    --ink-2:      #44606E;
+    --ink-3:      #7A919D;
+    --court:      #1B4B73;
+    --court-2:    #3D7BA8;
+    --court-soft: #DBE6EE;
+    --dist:       #BCCAD2;
+    --dist-2:     #93A9B5;
+    --ok:         #2C7F5F;
+    --warn:       #A9720F;
+    --crit:       #B23C29;
+    --ok-bg:      #E1EFE9;
+    --warn-bg:    #F5EDDA;
+    --crit-bg:    #F6E2DE;
+    --shadow:     0 1px 2px rgba(14,35,49,.06), 0 8px 24px -16px rgba(14,35,49,.22);
+
+    --f-display: "Gowun Batang", Georgia, "Nanum Myeongjo", serif;
+    --f-ui: "IBM Plex Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --f-data: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --r: 4px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --ground:     #081C2B;
+      --surface:    #0E293C;
+      --surface-2:  #133247;
+      --line:       #204259;
+      --line-soft:  #19374D;
+      --ink:        #E7EFF4;
+      --ink-2:      #A2BAC7;
+      --ink-3:      #6D8998;
+      --court:      #74B2DC;
+      --court-2:    #4C8FBE;
+      --court-soft: #16354B;
+      --dist:       #2A4F6B;
+      --dist-2:     #4E7B99;
+      --ok:         #57BE96;
+      --warn:       #DEB253;
+      --crit:       #E67E68;
+      --ok-bg:      #113729;
+      --warn-bg:    #372E17;
+      --crit-bg:    #3A221F;
+      --shadow:     0 1px 2px rgba(0,0,0,.3), 0 10px 30px -18px rgba(0,0,0,.8);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ground:     #081C2B;
+    --surface:    #0E293C;
+    --surface-2:  #133247;
+    --line:       #204259;
+    --line-soft:  #19374D;
+    --ink:        #E7EFF4;
+    --ink-2:      #A2BAC7;
+    --ink-3:      #6D8998;
+    --court:      #74B2DC;
+    --court-2:    #4C8FBE;
+    --court-soft: #16354B;
+    --dist:       #2A4F6B;
+    --dist-2:     #4E7B99;
+    --ok:         #57BE96;
+    --warn:       #DEB253;
+    --crit:       #E67E68;
+    --ok-bg:      #113729;
+    --warn-bg:    #372E17;
+    --crit-bg:    #3A221F;
+    --shadow:     0 1px 2px rgba(0,0,0,.3), 0 10px 30px -18px rgba(0,0,0,.8);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--f-ui);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 22px 100px; }
+
+  /* ---------- chrome ---------- */
+  .topbar {
+    display: flex; align-items: baseline; gap: 22px; flex-wrap: wrap;
+    padding: 20px 0 14px; border-bottom: 1px solid var(--line);
+  }
+  .mark { font-family: var(--f-display); font-weight: 700; font-size: 21px; letter-spacing: .01em; }
+  .mark span { color: var(--ink-3); font-family: var(--f-ui); font-weight: 500; font-size: 12px;
+               letter-spacing: .1em; text-transform: uppercase; margin-left: 9px; }
+  nav.tabs { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; }
+  nav.tabs button {
+    font: 500 13px/1 var(--f-ui); color: var(--ink-2); background: none;
+    border: 1px solid transparent; border-radius: var(--r); padding: 8px 12px; cursor: pointer;
+  }
+  nav.tabs button:hover { color: var(--ink); background: var(--surface-2); }
+  nav.tabs button[aria-selected="true"] { color: var(--surface); background: var(--court); border-color: var(--court); }
+  nav.tabs button:focus-visible, .phase:focus-visible, .filebtn:focus-visible {
+    outline: 2px solid var(--court-2); outline-offset: 2px;
+  }
+
+  .screen { display: none; }
+  .screen.on { display: block; }
+
+  /* ---------- type ---------- */
+  h1 {
+    font-family: var(--f-display); font-weight: 700; font-size: 33px; line-height: 1.3;
+    margin: 10px 0 0; text-wrap: balance; letter-spacing: -.01em;
+  }
+  h2 { font-family: var(--f-display); font-weight: 700; font-size: 23px; margin: 0 0 6px; text-wrap: balance; }
+  h3 { font-size: 15px; font-weight: 600; margin: 0 0 4px; }
+  p { margin: 0 0 12px; max-width: 68ch; }
+  .eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: .13em; text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .lead { color: var(--ink-2); font-size: 15.5px; max-width: 66ch; }
+  .num { font-family: var(--f-data); font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+  b.hl { font-weight: 600; }
+
+  section.block { margin-top: 46px; }
+  section.block > .eyebrow { display: block; margin-bottom: 8px; }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 30px 0 4px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .chip {
+    display: flex; align-items: baseline; gap: 7px; background: var(--surface);
+    border: 1px solid var(--line); border-radius: var(--r); padding: 6px 11px; font-size: 12.5px;
+  }
+  .chip i { font-style: normal; color: var(--ink-3); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+  .chip b { font-weight: 600; }
+
+  /* ---------- stat quad ---------- */
+  .quad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line);
+          border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow); }
+  .quad > div { background: var(--surface); padding: 18px 18px 16px; }
+  .quad .k { font-size: 11.5px; color: var(--ink-3); letter-spacing: .04em; }
+  .quad .v { font-family: var(--f-data); font-weight: 600; font-size: 30px; line-height: 1.15; margin-top: 6px;
+             font-variant-numeric: tabular-nums; }
+  .quad .v small { font-size: 15px; font-weight: 450; color: var(--ink-2); margin-left: 2px; }
+  .quad .s { font-size: 12px; color: var(--ink-2); margin-top: 5px; }
+  .quad .crit .v { color: var(--crit); }
+
+  /* ---------- cards ---------- */
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
+          padding: 20px 22px; box-shadow: var(--shadow); }
+  .card + .card { margin-top: 14px; }
+
+  /* ---------- player strip ---------- */
+  .figwrap { overflow-x: auto; }
+  .fignote { font-size: 12.5px; color: var(--ink-3); margin-top: 10px; }
+  svg.chart { display: block; width: 100%; min-width: 520px; }
+  svg text { font-family: var(--f-ui); }
+  svg .tick { font-family: var(--f-data); font-size: 10.5px; fill: var(--ink-3); }
+  svg .plabel { font-size: 10.5px; fill: var(--ink-2); }
+  svg .whisk { stroke: var(--dist); stroke-width: 2; stroke-linecap: round; }
+  svg .dot { fill: var(--court); }
+  svg .row:hover .whisk { stroke: var(--dist-2); }
+  svg .row:hover .dot { fill: var(--ink); }
+  svg .me { stroke: var(--crit); stroke-width: 2; stroke-dasharray: 3 3; }
+  svg .grid { stroke: var(--line-soft); stroke-width: 1; }
+
+  /* ---------- metric rows ---------- */
+  .mrow { display: grid; grid-template-columns: 216px 1fr 132px; gap: 18px; align-items: center;
+          padding: 15px 0; border-top: 1px solid var(--line-soft); }
+  .mrow:first-child { border-top: none; }
+  .mname { font-weight: 600; font-size: 14.5px; }
+  .mdesc { font-size: 12px; color: var(--ink-3); line-height: 1.45; }
+  .mnum { text-align: right; }
+  .mnum .u { font-family: var(--f-data); font-weight: 600; font-size: 19px; font-variant-numeric: tabular-nums; }
+  .mnum .p { font-size: 12px; color: var(--ink-2); margin-top: 2px; }
+  .pill { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 99px;
+          letter-spacing: .02em; }
+  .pill.ok { background: var(--ok-bg); color: var(--ok); }
+  .pill.warn { background: var(--warn-bg); color: var(--warn); }
+  .pill.crit { background: var(--crit-bg); color: var(--crit); }
+  svg.dist { display: block; width: 100%; height: 62px; }
+  svg.dist .bar { fill: var(--dist); }
+  svg.dist .band { stroke: var(--dist-2); stroke-width: 1.5; }
+  svg.dist .mean { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 2 2; }
+  svg.dist .axis { fill: var(--ink-3); font-family: var(--f-data); font-size: 9.5px; }
+  svg.dist .mk { font-family: var(--f-data); font-size: 10.5px; font-weight: 600; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--ink-2);
+            margin: 2px 0 12px; align-items: center; }
+  .legend span { display: flex; align-items: center; gap: 6px; }
+  .swatch { width: 13px; height: 9px; border-radius: 1px; background: var(--dist); display: inline-block; }
+  .swatch.me { width: 2px; height: 13px; border-radius: 0; background: var(--crit); }
+  .swatch.prev { width: 9px; height: 9px; border-radius: 99px; background: none; border: 1.5px solid var(--ink-3); }
+
+  /* ---------- pose ---------- */
+  .poserow { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .posebox { background: var(--surface-2); border: 1px solid var(--line-soft); border-radius: var(--r); padding: 12px; }
+  .posebox h4 { margin: 0 0 2px; font-size: 13px; font-weight: 600; }
+  .posebox .sub { font-size: 11.5px; color: var(--ink-3); }
+  svg.pose { display: block; width: 100%; height: 260px; }
+  .phases { display: flex; gap: 6px; margin-bottom: 12px; }
+  .phase { font: 500 12.5px/1 var(--f-ui); padding: 7px 13px; border-radius: 99px; cursor: pointer;
+           border: 1px solid var(--line); background: var(--surface); color: var(--ink-2); }
+  .phase[aria-selected="true"] { background: var(--court); border-color: var(--court); color: #fff; }
+  :root[data-theme="dark"] .phase[aria-selected="true"],
+  :root:not([data-theme="light"]) .phase[aria-selected="true"] { color: #07202F; }
+
+  /* ---------- notes / tables ---------- */
+  .note { border-left: 3px solid var(--court); padding: 2px 0 2px 16px; margin: 18px 0; }
+  .warnbox { background: var(--warn-bg); border: 1px solid var(--line); border-radius: var(--r); padding: 16px 18px; }
+  .warnbox h3 { color: var(--warn); }
+  ul.tight { margin: 8px 0 0; padding-left: 18px; }
+  ul.tight li { margin-bottom: 5px; font-size: 13.5px; color: var(--ink-2); }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line-soft); }
+  th { font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-3); font-weight: 600; }
+  td.n, th.n { text-align: right; font-family: var(--f-data); font-variant-numeric: tabular-nums; }
+  .foot { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--ink-3); }
+  .foot p { max-width: 76ch; margin-bottom: 8px; }
+
+  /* ---------- delta rows ---------- */
+  .drow { display: grid; grid-template-columns: 180px 1fr 190px; gap: 16px; align-items: center;
+          padding: 13px 0; border-top: 1px solid var(--line-soft); }
+  .drow:first-child { border-top: none; }
+  svg.slope { display: block; width: 100%; height: 34px; }
+  svg.slope .track { stroke: var(--line); stroke-width: 6; stroke-linecap: round; }
+  svg.slope .move { stroke: var(--court-2); stroke-width: 6; stroke-linecap: round; }
+  svg.slope .from { fill: none; stroke: var(--ink-3); stroke-width: 1.5; }
+  svg.slope .to { fill: var(--court); }
+  .dnum { text-align: right; font-size: 12.5px; color: var(--ink-2); }
+  .dnum b { font-family: var(--f-data); font-weight: 600; color: var(--ink); font-size: 14px; }
+
+  /* ---------- intake mock ---------- */
+  .drop { border: 1.5px dashed var(--line); border-radius: var(--r); background: var(--surface);
+          padding: 34px 20px; text-align: center; }
+  .drop .big { font-family: var(--f-display); font-size: 19px; font-weight: 700; }
+  .drop .sm { font-size: 12.5px; color: var(--ink-3); margin-top: 6px; }
+  .filebtn { margin-top: 14px; font: 500 13px/1 var(--f-ui); padding: 9px 16px; border-radius: var(--r);
+             border: 1px solid var(--court); background: var(--court); color: #fff; cursor: pointer; }
+  :root[data-theme="dark"] .filebtn, :root:not([data-theme="light"]) .filebtn { color: #07202F; }
+  .specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px;
+           background: var(--line); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; margin-top: 14px; }
+  .specs > div { background: var(--surface); padding: 14px 16px; }
+  .specs .k { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+  .specs .v { font-weight: 600; font-size: 14px; margin: 3px 0 3px; }
+  .specs .w { font-size: 12px; color: var(--ink-2); }
+  .checks { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line);
+            border-radius: var(--r); overflow: hidden; margin-top: 14px; }
+  .checks > div { background: var(--surface); display: grid; grid-template-columns: 26px 1fr auto;
+                  gap: 12px; padding: 12px 16px; align-items: baseline; }
+  .checks .mk { font-family: var(--f-data); font-weight: 600; }
+  .checks .pass .mk { color: var(--ok); }
+  .checks .fail .mk { color: var(--warn); }
+  .checks .t { font-size: 13.5px; font-weight: 600; }
+  .checks .d { font-size: 12px; color: var(--ink-3); font-weight: 400; }
+  .checks .val { font-family: var(--f-data); font-size: 12.5px; color: var(--ink-2); }
+
+  .tip {
+    position: fixed; z-index: 9; pointer-events: none; opacity: 0; transition: opacity .1s;
+    background: var(--ink); color: var(--surface); font-size: 12px; line-height: 1.45;
+    padding: 7px 10px; border-radius: var(--r); max-width: 230px; box-shadow: var(--shadow);
+  }
+  .tip .num { color: var(--surface); }
+
+  @media (max-width: 860px) {
+    .quad { grid-template-columns: repeat(2, 1fr); }
+    .mrow { grid-template-columns: 1fr; gap: 8px; }
+    .mnum { text-align: left; display: flex; align-items: baseline; gap: 10px; }
+    .drow { grid-template-columns: 1fr; gap: 6px; }
+    .dnum { text-align: left; }
+    .poserow { grid-template-columns: 1fr; }
+    h1 { font-size: 26px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+  /* ---------- pose overlay ---------- */
+  .poserow.solo { grid-template-columns: 1fr; }
+  .overbox { background: var(--surface-2); border: 1px solid var(--line-soft); border-radius: var(--r);
+             padding: 12px 12px 6px; }
+  svg.overlay { display: block; width: 100%; height: 360px; }
+  svg.overlay .probone { stroke: var(--dist-2); stroke-width: 3.2; stroke-linecap: round; }
+  svg.overlay .mybone  { stroke: var(--court); stroke-width: 3.6; stroke-linecap: round; }
+  svg.overlay .mybone.key { stroke: var(--crit); stroke-width: 5; }
+  svg.overlay .link { stroke: var(--ink-3); stroke-dasharray: 2.5 3; stroke-linecap: round; }
+  svg.overlay .link.big { stroke: var(--crit); stroke-dasharray: none; }
+  svg.overlay .ref { stroke: var(--ink-3); stroke-width: 1.2; stroke-dasharray: 5 5; }
+  svg.overlay .arc { fill: var(--crit-bg); stroke: none; }
+  svg.overlay .glabel { font-family: var(--f-data); font-size: 11px; font-weight: 600; }
+  svg.overlay .gcap { font-size: 11.5px; fill: var(--ink-3); }
+  .devs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .devs .d { display: flex; align-items: baseline; gap: 7px; font-size: 12px;
+             background: var(--surface); border: 1px solid var(--line); border-radius: 99px; padding: 4px 11px; }
+  .devs .d b { font-family: var(--f-data); font-weight: 600; color: var(--crit); }
+  .swatch.pro { background: var(--dist-2); height: 3px; width: 16px; border-radius: 2px; }
+  .swatch.mine { background: var(--court); height: 3px; width: 16px; border-radius: 2px; }
+  .swatch.dev { background: var(--crit); height: 3px; width: 16px; border-radius: 2px; }
+
+  /* ---------- similarity ---------- */
+  svg.par { display: block; width: 100%; min-width: 560px; height: 330px; }
+  svg.par .pl { stroke: var(--dist); stroke-width: 1; fill: none; opacity: .55; }
+  svg.par .pl.near { stroke: var(--court-2); stroke-width: 2.4; opacity: 1; }
+  svg.par .pl.me { stroke: var(--crit); stroke-width: 2.8; opacity: 1; }
+  svg.par .zero { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 3 3; }
+  svg.par .axl { stroke: var(--line); stroke-width: 1; }
+  svg.par .cap { font-size: 10.5px; fill: var(--ink-3); }
+  table.sim td.name { font-weight: 600; }
+  table.sim tr.hit td { background: var(--court-soft); }
+
+  /* ---------- 한눈에 (triage) ---------- */
+  .triage { display: grid; grid-template-columns: 1fr 300px; gap: 22px; align-items: start; }
+  svg.tor { display: block; width: 100%; }
+  svg.tor .zone { fill: var(--surface-2); }
+  svg.tor .zline { stroke: var(--line); stroke-width: 1; }
+  svg.tor .mid { stroke: var(--ink-3); stroke-width: 1.2; }
+  svg.tor .lab { font-size: 12.5px; fill: var(--ink-2); }
+  svg.tor .val { font-family: var(--f-data); font-size: 11.5px; font-weight: 600; }
+  svg.tor .cap { font-size: 10.5px; fill: var(--ink-3); font-family: var(--f-data); }
+  .tally { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line);
+           border-radius: var(--r); overflow: hidden; }
+  .tally > div { background: var(--surface); padding: 13px 15px; display: grid;
+                 grid-template-columns: 30px 1fr auto; gap: 10px; align-items: baseline; }
+  .tally .cnt { font-family: var(--f-data); font-weight: 600; font-size: 21px; }
+  .tally .t { font-size: 13px; font-weight: 600; }
+  .tally .w { font-size: 11.5px; color: var(--ink-3); grid-column: 2 / -1; margin-top: -3px; }
+  .tally .crit .cnt { color: var(--crit); }
+  .tally .warn .cnt { color: var(--warn); }
+  .tally .ok .cnt { color: var(--ok); }
+  .verdict { margin-top: 14px; background: var(--crit-bg); border-radius: var(--r); padding: 14px 16px; }
+  .verdict .k { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--crit);
+                font-weight: 600; }
+  .verdict p { margin: 5px 0 0; font-size: 13.5px; color: var(--ink); }
+  table.need td.k, table.need th.k { font-weight: 600; }
+  table.need tr.focus td { background: var(--court-soft); }
+  table.need td small { color: var(--ink-3); }
+  @media (max-width: 860px) { .triage { grid-template-columns: 1fr; } }
+
+  .swatch.arm  { background: var(--court);  height: 4px; width: 18px; border-radius: 2px; }
+  .swatch.limb { background: var(--ink-2);  height: 3px; width: 18px; border-radius: 2px; }
+  /* ---------- 전수 스캔 ---------- */
+  table.scan td.a { font-family: var(--f-data); font-size: 12.5px; }
+  table.scan tr.hit td { background: var(--crit-bg); }
+  table.scan td.v { font-family: var(--f-data); }
+
+  /* ---------- 고치는 법 ---------- */
+  .fix { border: 1px solid var(--line); border-radius: var(--r); background: var(--surface);
+         box-shadow: var(--shadow); overflow: hidden; }
+  .fix + .fix { margin-top: 16px; }
+  .fix > header { display: grid; grid-template-columns: auto 1fr auto; gap: 14px;
+                  align-items: baseline; padding: 16px 20px; border-bottom: 1px solid var(--line-soft);
+                  background: var(--surface-2); }
+  .fix .rank { font-family: var(--f-data); font-size: 11px; font-weight: 600; letter-spacing: .1em;
+               text-transform: uppercase; color: var(--surface); background: var(--court);
+               padding: 4px 9px; border-radius: 99px; white-space: nowrap; }
+  :root[data-theme="dark"] .fix .rank,
+  :root:not([data-theme="light"]) .fix .rank { color: #07202F; }
+  .fix h3 { font-family: var(--f-display); font-size: 18px; font-weight: 700; margin: 0;
+            text-wrap: balance; }
+  .fix .now { font-family: var(--f-data); font-size: 12.5px; color: var(--ink-2); white-space: nowrap;
+              font-variant-numeric: tabular-nums; }
+  .fix .now b { color: var(--crit); }
+  .fix .body { display: grid; grid-template-columns: 1fr 1fr; }
+  .fix .body > div { padding: 18px 20px; }
+  .fix .body > div + div { border-left: 1px solid var(--line-soft); }
+  .fix .body > div.span { grid-column: 1 / -1; border-left: none;
+                          border-top: 1px solid var(--line-soft); }
+  .fix h4 { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+            color: var(--ink-3); margin: 0 0 9px; }
+  .fix p { font-size: 14px; margin: 0 0 10px; max-width: 60ch; }
+  .fix p:last-child { margin-bottom: 0; }
+  .fix ol.drills { margin: 0; padding: 0; list-style: none; counter-reset: dr; display: grid; gap: 12px; }
+  .fix ol.drills li { counter-increment: dr; display: grid; grid-template-columns: 22px 1fr; gap: 11px;
+                      font-size: 14px; }
+  .fix ol.drills li::before { content: counter(dr); font-family: var(--f-data); font-size: 11px;
+                              font-weight: 600; color: var(--court-2); border: 1px solid var(--line);
+                              border-radius: 99px; width: 22px; height: 22px; display: grid;
+                              place-items: center; margin-top: 1px; }
+  .fix ol.drills b { font-weight: 600; }
+  .fix .cue { display: block; margin-top: 3px; font-family: var(--f-display); font-size: 15px;
+              color: var(--court); }
+  :root[data-theme="dark"] .fix .cue,
+  :root:not([data-theme="light"]) .fix .cue { color: var(--court); }
+  .fix .check { background: var(--surface-2); }
+  .fix .check p { color: var(--ink-2); font-size: 13.5px; }
+  .keep { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px;
+          background: var(--line); border: 1px solid var(--line); border-radius: var(--r);
+          overflow: hidden; }
+  .keep > div { background: var(--surface); padding: 13px 15px; }
+  .keep .n2 { font-family: var(--f-data); font-weight: 600; font-size: 15px; color: var(--ok); }
+  .keep .l { font-size: 12.5px; margin-top: 2px; }
+  /* ---------- 용어 ---------- */
+  .terms { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px;
+           background: var(--line); border: 1px solid var(--line); border-radius: var(--r);
+           overflow: hidden; }
+  .terms > div { background: var(--surface); padding: 14px 16px; }
+  .terms dt { font-family: var(--f-data); font-weight: 600; font-size: 13px; color: var(--court); }
+  .terms dd { margin: 4px 0 0; font-size: 12.5px; color: var(--ink-2); line-height: 1.5; }
+  @media (max-width: 860px) {
+    .fix .body { grid-template-columns: 1fr; }
+    .fix .body > div + div { border-left: none; border-top: 1px solid var(--line-soft); }
+    .fix > header { grid-template-columns: 1fr; gap: 6px; }
+    .fix .rank { justify-self: start; }
+  }
+
+  /* ---------- 코치 노트 ---------- */
+  .coach { max-width: 60ch; }
+  .coach p { font-size: 16.5px; line-height: 1.78; margin: 0 0 18px; max-width: none; }
+  .coach p b { font-weight: 600; }
+  .coach .open { font-size: 17.5px; }
+  .coach .hit { font-family: var(--f-display); font-size: 19px; line-height: 1.65;
+                border-left: 3px solid var(--court); padding: 4px 0 4px 20px; margin: 26px 0; }
+  .coach .close { color: var(--ink-2); font-size: 15.5px; padding-top: 6px;
+                  border-top: 1px solid var(--line-soft); margin-top: 26px; }
+  details.numbers { margin-top: 26px; border: 1px solid var(--line); border-radius: var(--r);
+                    background: var(--surface); }
+  details.numbers summary { cursor: pointer; padding: 13px 18px; font-size: 13px; font-weight: 600;
+                            color: var(--ink-2); list-style: none; display: flex; gap: 9px;
+                            align-items: center; }
+  details.numbers summary::-webkit-details-marker { display: none; }
+  details.numbers summary::before { content: "+"; font-family: var(--f-data); color: var(--court-2);
+                                    font-size: 15px; line-height: 1; }
+  details.numbers[open] summary::before { content: "\2212"; }
+  details.numbers summary:focus-visible { outline: 2px solid var(--court-2); outline-offset: -2px; }
+  details.numbers > div { padding: 4px 18px 16px; border-top: 1px solid var(--line-soft); }
+  details.numbers p { font-size: 13.5px; color: var(--ink-2); margin: 12px 0 0; }
+  details.numbers p b { color: var(--ink); }
+</style>
+
+<div class="wrap">
+  <header class="topbar">
+    <div class="mark">Trophy<span>Serve Report</span></div>
+    <nav class="tabs" role="tablist">
+      <button role="tab" data-screen="intake" aria-selected="false">영상 접수</button>
+      <button role="tab" data-screen="report" aria-selected="true">분석 리포트</button>
+      <button role="tab" data-screen="progress" aria-selected="false">변화 추적</button>
+    </nav>
+  </header>
+
+  <!-- ============ 리포트 ============ -->
+  <section class="screen on" id="report" role="tabpanel">
+    <div class="hero">
+      <div class="eyebrow">분석 리포트 · 2026-08-29</div>
+      <h1>뛰지 않고, 서서 치고 있습니다</h1>
+      <p class="lead" style="margin-top:12px">때리는 순간 무릎이 <b class="hl">157°</b>로 아직 굽어 있고(프로 173°), 두 다리는 <b class="hl">7°</b>밖에 벌어지지 않습니다(프로 31°). 준비 동작은 전부 정상입니다 — <b class="hl">마지막에 다리로 밀어 올리는 한 가지만</b> 빠져 있습니다.</p>
+      <div class="chips">
+        <div class="chip"><i>영상</i><b>seungju_another</b></div>
+        <div class="chip"><i>길이</i><b class="num">125프레임 / 30fps</b></div>
+        <div class="chip"><i>타임베이스</i><b>편집본</b></div>
+        <div class="chip"><i>비교군</i><b class="num" id="chip-n"></b></div>
+        <div class="chip"><i>카메라</i><b class="num" id="chip-az"></b></div>
+      </div>
+    </div>
+
+    <section class="block">
+      <div class="quad">
+        <div class="crit">
+          <div class="k">내 임팩트 무릎</div>
+          <div class="v num">157.4<small>°</small></div>
+          <div class="s">180°가 완전히 편 상태</div>
+        </div>
+        <div>
+          <div class="k">프로 평균</div>
+          <div class="v num">173.0<small>±8.2°</small></div>
+          <div class="s">남자 프로 3,149서브</div>
+        </div>
+        <div>
+          <div class="k">나보다 낮은 프로 서브</div>
+          <div class="v num">4.3<small>%</small></div>
+          <div class="s">3,149개 중 136개</div>
+        </div>
+        <div>
+          <div class="k">나보다 낮은 선수</div>
+          <div class="v num">0<small>명</small></div>
+          <div class="s">서브 20개 이상 44명 기준</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">한눈에</div>
+      <h2>열 개 중 손댈 곳은 둘, 나머지는 그대로 두면 됩니다</h2>
+      <p class="lead">
+        막대는 각 지표가 프로 평균에서 몇 SD 떨어졌는지(z)입니다. 회색 띠 안(±1 SD)이면 프로들이
+        흔히 쓰는 범위이고, 밖으로 나갈수록 프로가 잘 하지 않는 자세입니다.
+        <b class="hl">방향이 유리한 쪽으로 벗어난 것은 문제로 세지 않습니다</b> —
+        프로보다 깊게 앉거나 더 곧게 펴는 것은 잘하는 것이지 잘못이 아닙니다.
+      </p>
+      <div class="card">
+        <div class="triage">
+          <div class="figwrap"><svg class="tor" id="tor" aria-label="지표별 프로 평균 대비 편차"></svg></div>
+          <div>
+            <div class="tally" id="tally"></div>
+            <div class="verdict">
+              <div class="k">지금 할 일 하나</div>
+              <p><b>때리는 순간까지 다리를 밀어 올린다.</b> 경계 넷 중 셋(팔 들림 · 토스 팔 들림 ·
+                토스 팔 접힘)은 같은 뿌리라 따라옵니다. 앉는 깊이 · 팔꿈치 · 상체는 이미 프로 범위
+                한복판이라 건드리면 오히려 나빠집니다.</p>
+            </div>
+          </div>
+        </div>
+        <div class="fignote">
+          막대에 마우스를 올리면 실제 각도와 백분위가 나옵니다. 아래 ‘근거 1~4’가 이 판정의 근거입니다.
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">읽는 법</div>
+      <div class="terms">
+        <div><dt>백분위 (%ile)</dt><dd>프로 3,149서브 중 나보다 낮은 값이 몇 %인지. 50%면 딱 한가운데,
+          5% 아래면 프로가 거의 그렇게 하지 않는 자세입니다.</dd></div>
+        <div><dt>z</dt><dd>프로 평균에서 몇 걸음 떨어졌는지. 한 걸음(1)의 크기는 지표마다 다르고,
+          아래 ±SD가 그 걸음 폭입니다.</dd></div>
+        <div><dt>±SD</dt><dd>프로들이 그 값에서 흩어진 폭. <b class="hl">작을수록 프로가 엄격히 지키는
+          규칙</b>이라, 같은 10° 차이도 훨씬 무겁게 읽힙니다.</dd></div>
+        <div><dt>각도 180°</dt><dd>관절이 완전히 펴진 상태. 무릎 180° = 다리가 일직선,
+          90° = 직각으로 굽음.</dd></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">고치는 법</div>
+      <h2>세 가지를 순서대로, 한 번에 하나씩</h2>
+      <p class="lead">
+        아래 순서는 <b class="hl">고치기 쉬운 순</b>이 아니라 <b class="hl">다른 것을 끌고 오는 순</b>입니다.
+        1번이 해결되면 2·3번은 절로 따라오는 경우가 많습니다. 반대로 3번부터 손대면 1번이 그대로 남습니다.
+      </p>
+
+      <div class="fix">
+        <header>
+          <span class="rank">1순위</span>
+          <h3>서서 치지 말고, 뛰어서 치기</h3>
+          <span class="now">무릎 <b>157°</b> → 목표 170°+</span>
+        </header>
+        <div class="body">
+          <div>
+            <h4>지금 무슨 일이 벌어지나</h4>
+            <p>공을 때리는 순간에도 무릎이 <b class="hl">157°</b>로 아직 굽어 있습니다(프로 173°).
+              그리고 두 다리가 <b class="hl">7°</b>밖에 안 벌어져 거의 붙어 있습니다(프로 31°).</p>
+            <p>두 숫자를 합치면 그림이 하나로 모입니다 — <b class="hl">덜 편 게 아니라 뛰지 않은 것</b>입니다.
+              프로는 뒷다리로 밀어 올려 공중에 뜬 상태에서, 앞다리가 뒤로 차올라 가위처럼 벌어진 채
+              공을 맞힙니다. 나는 두 발이 땅에 붙은 채 팔로만 치고 있습니다.</p>
+          </div>
+          <div>
+            <h4>해보세요</h4>
+            <ol class="drills">
+              <li><div><b>토스만 하고 점프, 안 치기</b> — 20회. 토스 → 다리로 밀어 올려 점프 →
+                라켓은 그대로 두고 착지. 때리려는 욕심이 빠지면 다리가 살아납니다.
+                <span class="cue">“공을 치지 말고, 공까지 올라가 보세요.”</span></div></li>
+              <li><div><b>둘 세고 펴기</b> — 트로피 자세에서 <b>“하나”</b>에 멈췄다가
+                <b>“둘”</b>에 다리만 펴서 뜁니다. 라켓·공 없이 10회.
+                <span class="cue">“앉는 건 이미 잘 하고 있어요. 일어나는 걸 따로 연습하세요.”</span></div></li>
+              <li><div><b>토스를 반 라켓 더 높이</b> — 토스가 낮으면 내려오는 공을 쫓느라
+                다리 펼 시간이 없습니다. 다리가 안 펴지는 원인이 다리가 아니라 토스인 경우가 많습니다.
+                <span class="cue">“높이 올리고, 기다렸다 올라가서 치세요.”</span></div></li>
+            </ol>
+          </div>
+          <div class="span">
+            <h4>왜 이걸 해야 하나</h4>
+            <p><b class="hl">타점이 높아집니다.</b> 이건 기하학이라 확실합니다 — 같은 힘으로 쳐도 접점이
+              높으면 네트 위 여유가 커지고, 서비스 박스로 꽂히는 각도가 생깁니다. 낮은 타점에서는
+              네트를 넘기려 살살 칠 수밖에 없습니다.</p>
+            <p><b class="hl">팔이 할 일이 줄어듭니다.</b> 서브는 다리에서 시작해 몸통·어깨를 지나 라켓으로
+              전달되는 동작입니다. 출발점인 다리가 빠지면 그 몫을 팔이 대신 떠안습니다.
+              힘을 더 쓰는데 공은 안 빨라지는 상태가 여기서 나옵니다.</p>
+          </div>
+          <div class="span check">
+            <h4>혼자 확인하는 법 — 장비 없이</h4>
+            <p><b>서브를 치고 앞발이 어디에 떨어지는지 보세요.</b> 프로는 베이스라인 <b>안쪽</b>에 착지합니다.
+              친 자리에 그대로 서 있다면 뛰지 않은 것이고, 이 항목은 아직 그대로입니다.
+              발자국을 보려면 클레이코트나 젖은 하드코트가 편합니다. 이 하나만으로도 판정됩니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fix">
+        <header>
+          <span class="rank">2순위</span>
+          <h3>칠 때 왼팔을 몸으로 당겨 접기</h3>
+          <span class="now">왼 팔꿈치 <b>144°</b> → 목표 100° 안팎</span>
+        </header>
+        <div class="body">
+          <div>
+            <h4>지금 무슨 일이 벌어지나</h4>
+            <p>때리는 순간 왼팔이 <b class="hl">144°</b>로 거의 펴진 채 공중에 떠 있습니다.
+              프로는 <b class="hl">97°</b> — 팔꿈치를 접어 몸쪽으로 당겨 붙입니다.
+              상위 14% 안에 들 만큼 안 접는 편입니다.</p>
+            <p>토스한 왼팔을 그냥 “놔둔” 상태입니다. 프로에게 왼팔은 던지고 끝나는 팔이 아니라,
+              던진 다음 <b class="hl">몸통을 돌리는 데 쓰는 팔</b>입니다.</p>
+          </div>
+          <div>
+            <h4>해보세요</h4>
+            <ol class="drills">
+              <li><div><b>왼 주먹으로 옆구리 치기</b> — 때리는 순간 왼 주먹이 왼쪽 갈비뼈에 <b>닿아야</b> 합니다.
+                닿는 감각을 목표로 삼으세요. 각도를 재는 것보다 훨씬 쉽습니다.
+                <span class="cue">“왼손으로 옆구리를 툭 친다고 생각하세요.”</span></div></li>
+              <li><div><b>왼팔만 따로</b> — 라켓 없이, 오른팔은 신경 쓰지 말고 왼팔만 20회.
+                올렸다가 → 접어 당기기. 몸이 저절로 도는 게 느껴지면 맞게 하는 겁니다.</div></li>
+            </ol>
+          </div>
+          <div class="span">
+            <h4>왜 이걸 해야 하나</h4>
+            <p><b class="hl">몸통이 저절로 빨리 돕니다.</b> 피겨스케이팅에서 팔을 오므리면 회전이 빨라지는
+              것과 같은 원리입니다 — 팔을 몸 가까이 당기면 돌리기 어려운 정도(회전 관성)가 줄어들어,
+              같은 힘으로도 더 빨리 돌아갑니다. 왼팔을 편 채 두면 그 반대가 됩니다.</p>
+            <p><b class="hl">몸이 일찍 열리는 것을 막아줍니다.</b> 왼팔이 벌어진 채로 있으면 상체가
+              먼저 정면을 향해 버려서, 라켓이 따라오기 전에 회전이 끝납니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fix">
+        <header>
+          <span class="rank">3순위</span>
+          <h3>토스한 왼팔을 더 오래 세워두기</h3>
+          <span class="now">토스 팔 <b>140°</b> → 목표 160°+</span>
+        </header>
+        <div class="body">
+          <div>
+            <h4>지금 무슨 일이 벌어지나</h4>
+            <p>트로피 자세(가장 깊게 앉은 순간)에서 왼팔이 <b class="hl">140°</b>까지밖에 안 올라가 있습니다.
+              프로는 <b class="hl">163°</b>로 거의 수직에 가깝게 세워둡니다. 하위 3.2%입니다.</p>
+            <p>토스를 하고 팔을 <b class="hl">바로 내려버리는</b> 것입니다.</p>
+          </div>
+          <div>
+            <h4>해보세요</h4>
+            <ol class="drills">
+              <li><div><b>공을 계속 가리키기</b> — 토스한 뒤 왼손 손끝으로 공을 <b>따라가며 가리킵니다.</b>
+                앉았다가 일어나 칠 때까지 그대로.
+                <span class="cue">“던지고 손을 내리지 말고, 공을 가리킨 채 앉으세요.”</span></div></li>
+              <li><div><b>트로피 정지 3초</b> — 토스 없이, 트로피 자세를 만들고 3초 버팁니다. 10회.
+                왼팔이 귀 옆까지 올라가 있는지 거울이나 그림자로 확인하세요.</div></li>
+            </ol>
+          </div>
+          <div class="span">
+            <h4>왜 이걸 해야 하나</h4>
+            <p><b class="hl">어깨선이 기울어야 라켓이 떨어질 자리가 생깁니다.</b> 왼팔을 높이 세워두면
+              어깨선이 기울면서 오른 어깨가 뒤·아래로 내려갑니다. 라켓을 등 뒤로 떨어뜨릴 공간이
+              거기서 만들어집니다. 왼팔을 일찍 내리면 어깨선이 평평해지고, 그 공간이 사라집니다.</p>
+            <p>그래서 이 항목은 <b class="hl">2순위와 짝</b>입니다. 헷갈리기 쉬운데 시점이 다릅니다 —
+              <b class="hl">앉을 때는 세워두고, 칠 때는 당겨 접습니다.</b> 계속 세워두는 것도,
+              처음부터 내리는 것도 아닙니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="note">
+        <p style="margin:0 0 10px">
+          <b class="hl">한 번에 하나만 하세요.</b> 서브는 동작이 사슬처럼 이어져 있어서 두 가지를 동시에
+          바꾸면, 좋아져도 나빠져도 <b class="hl">어느 쪽 때문인지 알 수 없습니다.</b> 다시 찍어 재도
+          원인이 분리되지 않습니다.
+        </p>
+        <p style="margin:0">
+          1순위를 <b class="hl">2~3주</b> 잡고, 앞발 착지 위치가 베이스라인 안쪽으로 안정되면
+          그때 2순위로 넘어가세요. 다시 찍을 때는 앞의 ‘다음에 할 것’대로
+          <b class="hl">같은 자리에서 20개를 몰아서</b> 찍으면 됩니다.
+        </p>
+      </div>
+      <div class="warnbox">
+        <h3>드릴은 측정 결과가 아니라 일반적인 코칭 방법입니다</h3>
+        <p style="margin:8px 0 0; font-size:13.5px; color:var(--ink-2)">
+          이 리포트가 측정한 것은 <b class="hl">“프로와 어디가 다른가”까지</b>입니다. 위 드릴과 큐는
+          그 차이를 좁히는 데 흔히 쓰이는 방법이지, 이 데이터에서 도출된 것이 아닙니다.
+          몸이 다르면 맞는 방법도 다르니, 코치가 있다면 <b class="hl">측정 결과를 보여주고 방법은
+          코치와 정하는 편</b>이 낫습니다.
+        </p>
+        <p style="margin:10px 0 0; font-size:13.5px; color:var(--ink-2)">
+          <b class="hl">“고치면 공이 빨라진다”고는 쓰지 않았습니다.</b> 프로 2,216개의 퍼스트 서브에서
+          같은 선수 안의 편차만 놓고 보면, 이 리포트의 지표들과 구속의 상관은 전부
+          <b class="hl">|r| &lt; 0.06</b>으로 사실상 0이었습니다(3D 지표 15개를 더 만들어 재도 같았습니다).
+          그래서 근거는 “빨라진다”가 아니라 <b class="hl">“프로가 예외 없이 그렇게 한다”</b>입니다.
+          부상 위험에 관한 언급은 의학적 소견이 아닙니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">건드리지 말 것</div>
+      <h2>다섯 가지는 이미 프로 한복판입니다</h2>
+      <p class="lead">
+        고치려다 오히려 망가지는 쪽입니다. 특히 <b class="hl">앉는 깊이는 프로마다 51°까지 차이가 납니다</b> —
+        시너 85°, 조코비치 136°. 얼마나 깊게 앉을지는 취향의 영역이고, 지금 값은 정상 범위입니다.
+      </p>
+      <div class="keep">
+        <div><div class="n2">63%ile</div><div class="l">앉았을 때 무릎 굽힘</div></div>
+        <div><div class="n2">38%ile</div><div class="l">앉았다 펴는 양</div></div>
+        <div><div class="n2">38%ile</div><div class="l">토스 팔 펴짐</div></div>
+        <div><div class="n2">37%ile</div><div class="l">상체 젖힘</div></div>
+        <div><div class="n2">63%ile</div><div class="l">칠 때 팔꿈치 펴짐</div></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">근거 1 — 선수별 분포</div>
+      <h2>44명 전원이 나보다 위에 있습니다</h2>
+      <p class="lead">
+        2024 US 오픈 남자 프로의 서브 <b class="hl">전량</b>(품질 라벨 2 이상, 3,149개)을
+        내 영상과 같은 카메라 각도로 투영해 임팩트 무릎 각도를 다시 쟀습니다. 아래는 그중
+        서브 20개 이상을 남긴 44명의 <b class="hl">선수별 평균과 5~95% 범위</b>입니다.
+      </p>
+      <div class="card">
+        <div class="figwrap"><svg class="chart" id="players" aria-label="선수별 임팩트 무릎 각도 분포"></svg></div>
+        <div class="fignote">
+          점 = 선수 평균, 가로선 = 그 선수 서브의 5~95% 범위. 점선 = 내 값 157.4°.
+          점에 마우스를 올리면 선수별 수치가 나옵니다.
+        </div>
+      </div>
+      <div class="note">
+        <p style="margin:0">
+          선수 <b class="hl">개인 평균</b>으로 보면 가장 낮은 Jiri Lehecka도 168.3°이고, 44명 중
+          내 157.4°보다 낮은 선수는 없습니다. 다만 <b class="hl">개별 서브</b>로 내려가면 얘기가 달라집니다 —
+          Djokovic은 자기 서브의 21.8%가 157.4° 아래입니다. 정확한 문장은
+          “프로는 모든 서브에서 다리를 편다”가 아니라 <b class="hl">“평균적으로 그 아래에 머무는 선수는 없다”</b>입니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">근거 2 — 지표 10개</div>
+      <h2>프로 분포 위에 내 값을 얹으면</h2>
+      <p class="lead">
+        회색 막대가 프로 3,149서브의 실제 분포(도수), 세로선이 내 값, 빈 동그라미가 이전 폼입니다.
+        점수가 아니라 <b class="hl">위치</b>입니다. 여기 실린 10개는 우리가 가진 프로 클립 3개로
+        비교 타당성을 검증한 지표만 남긴 것입니다.
+      </p>
+      <div class="legend">
+        <span><i class="swatch"></i>프로 3,149서브 분포</span>
+        <span><i class="swatch me"></i>내 값 (현재 폼)</span>
+        <span><i class="swatch prev"></i>이전 폼</span>
+        <span>점선 = 프로 평균</span>
+      </div>
+      <div class="card" id="metrics"></div>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">근거 3 — 자세</div>
+      <h2>같은 각도로 겹쳐 보면</h2>
+      <p class="lead">
+        프로 3,149서브의 <b class="hl">관절별 중앙값 자세</b>와 내 자세입니다. 둘 다 골반을 원점에,
+        몸통 길이를 1로 맞춰 그렸으므로 크기가 아니라 자세만 비교됩니다.
+        <b class="hl">겹쳐보기</b>는 두 골격을 포개고 관절끼리 선으로 이어 어긋난 양을 직접 보여주고,
+        <b class="hl">펴짐 선</b>은 발목에서 손목까지의 사슬이 얼마나 곧게 뻗었는지를 봅니다.
+        <b class="hl">굵은 파란 선은 라켓을 든 오른팔</b>입니다 — 위 표의 팔 관련 지표가 전부 이 구간에서
+        나오기 때문에 눈으로 찾기 쉽게 칠했습니다.
+      </p>
+      <div class="card">
+        <div class="phases" role="tablist" aria-label="서브 단계">
+          <button class="phase" role="tab" data-phase="trophy" aria-selected="false">트로피 (앉은 순간)</button>
+          <button class="phase" role="tab" data-phase="impact" aria-selected="true">임팩트 (때리는 순간)</button>
+        </div>
+        <div class="phases" role="tablist" aria-label="보기 방식" style="margin-top:-4px">
+          <button class="view" role="tab" data-view="side" aria-selected="true">나란히</button>
+          <button class="view" role="tab" data-view="over" aria-selected="false">겹쳐보기</button>
+          <button class="view" role="tab" data-view="chain" aria-selected="false">펴짐 선</button>
+        </div>
+        <div class="overbox" id="overwrap">
+          <svg class="overlay" id="overlay" aria-label="프로 중앙값과 내 자세를 겹친 그림"></svg>
+          <div class="legend" style="margin:6px 0 2px">
+            <span><i class="swatch pro"></i>프로 중앙값</span>
+            <span><i class="swatch mine"></i>나</span>
+            <span><i class="swatch dev"></i>많이 어긋난 관절</span>
+            <span id="over-cap"></span>
+          </div>
+          <div class="devs" id="devs"></div>
+        </div>
+        <div class="legend" id="poselegend">
+          <span><i class="swatch arm"></i>치는 팔 (어깨→팔꿈치→손목)</span>
+          <span><i class="swatch limb"></i>나머지 뼈대</span>
+          <span id="poselegend-note"></span>
+        </div>
+        <div class="poserow" id="poserow">
+          <div class="posebox">
+            <h4>프로 중앙값</h4>
+            <div class="sub">3,149서브의 관절별 중앙값 — 합성 자세입니다</div>
+            <svg class="pose" id="pose-pro" aria-label="프로 중앙값 자세"></svg>
+          </div>
+          <div class="posebox">
+            <h4>나 (seungju_another)</h4>
+            <div class="sub" id="pose-frame"></div>
+            <svg class="pose" id="pose-me" aria-label="내 자세"></svg>
+          </div>
+        </div>
+        <div class="fignote" id="posenote"></div>
+      </div>
+      <div class="note">
+        <p style="margin:0 0 10px">
+          <b class="hl">겹쳐보기</b>에서 임팩트 때 가장 크게 벌어지는 관절 셋은
+          <b class="hl">왼 손목(몸통의 52%) · 오른 발목(47%) · 오른 어깨(41%)</b>입니다.
+          오른 발목은 무릎이 덜 펴진 결과가 발끝까지 내려온 것이고, 왼 손목은
+          위 표의 <b class="hl">칠 때 토스 팔 접힘 143.9°</b>(프로 97.5°, 86%ile) —
+          프로가 치는 순간 왼팔을 몸쪽으로 끌어당기는 데 비해 나는 편 채로 두는 것이 그대로 보입니다.
+        </p>
+        <p style="margin:0">
+          <b class="hl">펴짐 선</b>에서는 임팩트 때 프로의 사슬이 직선에서 최대 18%(어깨)만 벗어나 거의 곧은 반면,
+          나는 39%(어깨) · 19%(무릎)로 꺾여 있습니다. 반대로 트로피에서는 프로가 무릎 59%로 나(35%)보다
+          더 굽어 있습니다 — <b class="hl">굽힐 때 더 굽히고, 펼 때 더 곧게</b>가 한 그림에 들어옵니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">근거 4 — 누구와 닮았나</div>
+      <h2>지표 10개를 한 줄로 이으면, 나는 Rublev 형입니다</h2>
+      <p class="lead">
+        지표마다 프로 분포의 z(평균에서 몇 SD 떨어졌나)로 바꾸면 선수 한 명이 <b class="hl">꺾은선 하나</b>가 됩니다.
+        회색 44개가 프로, 파란색이 나와 가장 가까운 선수, 빨간색이 나입니다.
+        선끼리 겹치는 구간은 같은 폼, 벌어지는 구간이 차이입니다.
+      </p>
+      <div class="card">
+        <div class="figwrap"><svg class="par" id="par" aria-label="선수별 z 프로필 꺾은선"></svg></div>
+        <div class="fignote">
+          점에 마우스를 올리면 선수별 각도가 나옵니다. 세로 0선이 프로 평균입니다.
+        </div>
+      </div>
+      <div class="card">
+        <table class="sim">
+          <thead><tr><th>가까운 순서</th><th class="n">거리</th><th class="n">무릎 뺀 거리</th>
+            <th class="n">평균 구속</th><th class="n">서브</th></tr></thead>
+          <tbody id="simtb"></tbody>
+        </table>
+      </div>
+      <div class="note">
+        <p style="margin:0 0 10px">
+          10개 전부로는 <b class="hl">Taylor Fritz</b>가 가장 가깝고(거리 2.41), 그 다음이 Li Tu · Gael Monfils ·
+          <b class="hl">Andrey Rublev</b>입니다. 그런데 <b class="hl">임팩트 무릎 하나만 빼면 Rublev가 1위로 올라옵니다</b>(1.69).
+          나머지 아홉 개에서는 이미 Rublev와 거의 같은 폼이라는 뜻이고, 비교 영상으로 쓰고 있는 선수와 일치합니다.
+        </p>
+        <p style="margin:0">
+          가장 먼 선수는 <b class="hl">Alexander Zverev</b>(3.76)입니다. 키 198cm에 평균 195km/h로 이 데이터셋에서
+          가장 빠른 축인데, 폼의 생김새가 나와 가장 다릅니다. <b class="hl">따라 할 대상으로는 맞지 않습니다.</b>
+        </p>
+      </div>
+      <div class="warnbox">
+        <h3>이 거리는 “누가 더 잘한다”가 아닙니다</h3>
+        <p style="margin:8px 0 0; font-size:13.5px; color:var(--ink-2)">
+          10개 지표를 같은 무게로 더한 기하적 거리일 뿐이고, 어느 지표가 더 중요한지는 반영돼 있지 않습니다.
+          선수 평균과의 거리라서 그 선수의 서브마다 있는 편차도 지워집니다.
+          <b class="hl">참고할 영상을 고를 때 쓰는 값</b>이지, 실력이나 구속을 뜻하지 않습니다.
+          서브 20개 이상을 남긴 44명만 대상입니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">근거 5 — 전수 스캔</div>
+      <h2>만들 수 있는 각도 2,184개를 전부 재봤습니다</h2>
+      <p class="lead">
+        지금까지의 10개는 사람이 고른 각도입니다. 그러면 <b class="hl">고르지 않은 각도 중에 더 큰 차이가
+        숨어 있지 않은가?</b> 두 규약이 같은 지점을 가리키는 관절 14개로 만들 수 있는
+        모든 (끝점—<b class="hl">꼭짓점</b>—끝점) 조합 1,092개를 트로피·임팩트 두 구간에서
+        전부 계산해, 프로 3,149서브와 같은 방식으로 비교했습니다.
+      </p>
+      <div class="card">
+        <table class="scan">
+          <thead><tr><th>임팩트 각도</th><th class="n">내 값</th><th class="n">프로</th>
+            <th class="n">%ile</th><th class="n">z</th></tr></thead>
+          <tbody id="scantb"></tbody>
+        </table>
+        <div class="fignote">
+          빨간 줄이 전수 스캔에서 새로 나온 것, 마지막 줄은 비교용 기존 지표입니다.
+          타당성 게이트(프로 클립 3개가 자기 선수 분포 5~95% 안)를 통과한 것만 실었습니다.
+        </div>
+      </div>
+      <div class="note">
+        <p style="margin:0 0 10px">
+          <b class="hl">새로 나온 것은 하나입니다 — 임팩트 때 두 다리가 벌어지지 않습니다.</b>
+          골반에서 본 양 무릎 사이 각이 프로는 <b class="hl">31.2°±12.7</b>인데 나는 <b class="hl">7.1°</b>
+          (하위 2.1%)로, 두 다리가 거의 붙어 있습니다. 발목도 같습니다(5.1° vs 19.2°).
+        </p>
+        <p style="margin:0">
+          프로는 때리는 순간 <b class="hl">한 다리로 밀어 올리고 다른 다리는 뒤로 차올라</b> 공중에서 가위처럼
+          벌어집니다. 나는 두 다리가 나란히 아래로 뻗어 있습니다 —
+          <b class="hl">이건 “덜 폈다”가 아니라 “뛰지 않았다”에 가깝습니다.</b>
+          앞서 나온 오른 무릎 157.4°와 같은 뿌리이고, 서로 다른 각도에서 같은 것을 보고 있습니다.
+        </p>
+      </div>
+      <div class="warnbox">
+        <h3>이건 결론이 아니라 후보입니다</h3>
+        <p style="margin:8px 0 0; font-size:13.5px; color:var(--ink-2)">
+          2,184개를 한꺼번에 검정하면 <b class="hl">우연히도 극단값이 나옵니다.</b> 실제로 |z|&gt;2이면서
+          게이트를 통과한 각도는 <b class="hl">59개</b>인데, 아무 차이가 없어도 우연히 기대되는 개수가
+          <b class="hl">약 99개</b>입니다. 즉 <b class="hl">전수 스캔은 우연 수준을 넘는 발견을 만들어내지
+          못했습니다.</b> 위 다리 항목을 실은 이유는 z가 커서가 아니라 — z는 −1.9로 기존 무릎과 같은
+          크기입니다 — <b class="hl">해석이 되고, 이미 있는 결론과 물리적으로 맞물리기 때문</b>입니다.
+        </p>
+        <p style="margin:10px 0 0; font-size:13.5px; color:var(--ink-2)">
+          z가 +6까지 치솟는 조합도 있었지만(예: 오른무릎을 꼭짓점으로 한 좌우 교차 각도) 전부
+          <b class="hl">기하적으로 예민한 정의</b>라 작은 자세 차이가 크게 증폭된 것이고,
+          해석할 수 없어 싣지 않았습니다. 서브 1개에서 나온 값이라는 한계도 그대로입니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">측정하지 않은 것</div>
+      <div class="warnbox">
+        <h3>시간·속도 지표 3개와 라켓 지표 2개는 이 리포트에 없습니다</h3>
+        <ul class="tight">
+          <li><b>트로피→임팩트 소요 · 어깨 회전 각속도 · 스윙 템포</b> — 업로드 영상이 편집본으로 판정돼
+            초·각속도 계산을 막았습니다. 실시간으로 다시 찍으면 채워집니다.</li>
+          <li><b>라켓 드롭 깊이 · 채찍 집중도</b> — 기준이 되는 프로 데이터셋에 라켓 추적이 없어
+            비교 자체가 불가능합니다.</li>
+          <li><b>타점 높이</b> — 검증에서 탈락했습니다(Rublev 0%ile / Djokovic 97%ile로 방향조차 안 맞음).</li>
+          <li><b>측면에서 찍은 영상</b>에는 이 방식을 쓸 수 없습니다. 카메라가 서버 뒤/앞 30° 안에 있어야
+            2D 각도가 실제 각도와 5~10° 안에서 일치합니다.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">다음에 할 것</div>
+      <h2>서브 몇 개를 찍어야 하나 — 20개면 충분합니다</h2>
+      <p class="lead">
+        지금 값은 <b class="hl">서브 1개에서 나온 단일 측정</b>입니다. 몇 개를 더 찍어야 하는지는
+        지표마다 다르고, 프로들이 <b class="hl">자기 서브들 사이에서 얼마나 흔들리는지</b>(개인 SD)로 계산됩니다.
+        서브 20개 이상을 남긴 44명의 개인 SD 중앙값을 썼습니다.
+      </p>
+      <div class="card">
+        <table class="need">
+          <thead><tr>
+            <th class="k">지표</th>
+            <th class="n">프로 개인 SD</th>
+            <th class="n">내 평균 ±3°</th>
+            <th class="n">차이를 절반 줄였는지 판정</th>
+          </tr></thead>
+          <tbody id="needtb"></tbody>
+        </table>
+        <div class="fignote">
+          파란 줄이 지금 고치려는 지표입니다. 95% 신뢰구간 기준(n = (1.96·SD/목표폭)²).
+        </div>
+      </div>
+      <div class="note">
+        <p style="margin:0 0 10px">
+          <b class="hl">고치려는 지표일수록 적게 찍어도 됩니다.</b> 프로와의 차이가 크기 때문입니다 —
+          임팩트 무릎은 <b class="hl">3개</b>, 토스 팔 들림은 <b class="hl">4개</b>만 찍어도 절반쯤 좁혔는지 판정됩니다.
+          반대로 앉았을 때 무릎은 이미 프로와 3.3° 차이라 판정에 398개가 필요한데,
+          <b class="hl">그건 애초에 잴 필요가 없는 항목</b>입니다.
+        </p>
+        <p style="margin:0">
+          그래서 <b class="hl">5~10개면 변화 추적</b>, <b class="hl">20개면 절대값까지 ±3° 안에서 확정</b>됩니다.
+          그 이상은 낭비입니다 — 남는 오차가 개수가 아니라 아래 것에서 오기 때문입니다.
+        </p>
+      </div>
+      <div class="warnbox">
+        <h3>개수보다 중요한 것 — 한 자리에서 몰아 찍기</h3>
+        <p style="margin:8px 0 0; font-size:13.5px; color:var(--ink-2)">
+          시점 추정의 ±10° 오차는 <b class="hl">계통 편향이라 평균을 내도 사라지지 않습니다.</b>
+          100개를 찍어도 그대로 남습니다. 대신 20개를 <b class="hl">같은 삼각대·같은 자리에서 한 번에</b>
+          찍으면 그 편향이 20개에 공통으로 들어가, “지난달 대비 얼마나 폈나” 같은 세션 간 비교는
+          정확해집니다. 절대값보다 이쪽이 훨씬 쓸모 있습니다.
+          실시간(슬로모 끄기)으로 찍으면 지금 막혀 있는 시간·속도 지표 3개도 함께 열립니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">코치 노트</div>
+      <h2>잘 앉았는데, 그대로 서서 칩니다</h2>
+
+      <div class="coach">
+        <p class="open">
+          영상 보니까 <b>준비 동작은 좋습니다.</b> 무릎 잘 접고, 상체 잘 젖히고, 토스도 안정적이에요.
+          여기까지는 손댈 게 없습니다. 문제는 딱 마지막입니다.
+        </p>
+
+        <p>
+          프로 서브를 옆에서 보면, 때리는 순간 <b>몸이 공중에 떠 있습니다.</b> 뒷발로 땅을 밀고
+          앞발은 뒤로 차올라가 있어요. 그래서 두 다리가 가위처럼 벌어집니다.
+          지금 서브는 두 발이 땅에 붙어 있고, 다리가 거의 나란히 아래로 뻗어 있습니다.
+        </p>
+
+        <p class="hit">
+          그러니까 <b>덜 편 게 아니라, 안 뛴 겁니다.</b><br>
+          접는 건 이미 잘 하고 있으니 <b>펴는 걸</b> 연습할 게 아니라 <b>일어나서 뜨는 걸</b> 연습해야 합니다.
+        </p>
+
+        <p>
+          당장 오늘 코트에서 하나만 한다면 이겁니다 —
+          <b>서브 치고 나서 앞발이 어디 떨어지는지 보세요.</b> 코트 안쪽으로 들어가 있으면 뛴 겁니다.
+          친 자리에 그대로 서 있으면 아직입니다. 이거 하나면 카메라 없이도 매번 확인됩니다.
+        </p>
+
+        <p>
+          팔도 같은 얘기예요. <b>팔꿈치는 잘 폈습니다.</b> 근데 어깨에서 팔을 덜 올렸어요.
+          펴는 거랑 올리는 건 다른 동작입니다. 라켓으로 최대한 높은 데를 긁는다고 생각하세요.
+        </p>
+
+        <p>
+          왼팔은 두 군데서 놓치고 있습니다. <b>앉을 때는</b> 공을 계속 가리킨 채로 버텨야 하는데
+          던지자마자 내려버리고, <b>칠 때는</b> 옆구리로 당겨 접어야 하는데 편 채로 둡니다.
+          헷갈리기 쉬운데 순서가 있어요 — <b>세워뒀다가, 칠 때 당깁니다.</b>
+        </p>
+
+        <p>
+          하나만 더. <b>앉는 깊이는 신경 쓰지 마세요.</b> 시너는 아주 깊게 앉고 조코비치는 얕게 앉습니다.
+          둘 다 세계 최고예요. 얼마나 깊게 앉느냐는 취향입니다.
+          모두가 똑같이 지키는 건 <b>끝까지 밀어 올린다</b>는 것 하나뿐입니다.
+        </p>
+
+        <p class="close">
+          이전 영상에서도 똑같았습니다. 폼을 바꾸셨는데 이 습관만 그대로 남아 있어요.
+          우연이나 그날 컨디션이 아니라 <b>몸에 밴 것</b>이라, 의식하고 따로 연습하지 않으면
+          저절로는 안 없어집니다.
+        </p>
+      </div>
+
+      <details class="numbers">
+        <summary>위 얘기의 근거가 된 숫자 보기</summary>
+        <div>
+          <p><b>다리</b> — 임팩트 무릎 157.4° (프로 173.0±8.2, 하위 4.3%).
+            두 무릎이 벌어진 각 7.1° (프로 31.2±12.7, 하위 2.1%).
+            이전 폼에서도 158.6°로 같아 습관으로 봅니다.</p>
+          <p><b>무릎이 특히 무겁게 읽히는 이유</b> — 프로들 사이 편차가 ±8.2°로 유난히 좁습니다.
+            다른 항목이 ±20~50°인 걸 생각하면 프로라면 대체로 지키는 규칙이라는 뜻이고,
+            그래서 15.6° 차이가 크게 읽힙니다.</p>
+          <p><b>팔</b> — 칠 때 팔꿈치 펴짐 155.6° (63%ile, 정상)인데
+            칠 때 팔 들림은 122.3° (프로 140.0±22.3, 하위 12%).
+            펴는 것과 들어올리는 것이 갈립니다.</p>
+          <p><b>왼팔</b> — 트로피에서 토스 팔 들림 139.7° (프로 163.0±20.8, 하위 3.2%),
+            임팩트에서 토스 팔 접힘 143.9° (프로 97.5±39.7, 상위 14%).</p>
+          <p><b>앉는 깊이</b> — 트로피 무릎의 프로 분포가 111.5±22.2° (5~95%: 84.5~153.7°)로 매우 넓습니다.
+            내 값 114.8°는 63%ile로 한복판입니다.</p>
+        </div>
+      </details>
+    </section>
+
+    <div class="foot">
+      <p>
+        <b>기준 분포</b> · 2024 US Open 남자 서브 3,149개 / 55명 (quality_label ≥ 2) —
+        UVA <i>Tennis Serve Analysis Dataset</i>, CC BY 4.0. 선수별 표는 서브 20개 이상인 44명.
+      </p>
+      <p>
+        <b>측정 방식</b> · 데이터셋의 3D 자세를 내 영상과 같은 카메라 방위각으로 투영해 2D끼리 비교합니다.
+        내 영상을 3D로 리프팅하는 반대 방향은 깊이 모호성으로 실패해(2D 154° vs 3D 35°) 폐기했습니다.
+      </p>
+      <p>
+        <b>한계</b> · 값은 서브 1개에서 나온 단일 측정입니다. 여러 개를 찍어 평균내면 더 정확합니다.
+        시점 추정에 ±10° 오차가 있고, 3D 복원 정밀도의 한계로 5° 이하 차이는 의미가 없습니다.
+        공 속도·회전·코스, 부상 위험은 측정하지 않으며 의학적 소견이 아닙니다.
+        <b>‘영상 접수’ 탭은 UI 시안이고, 리포트·변화추적 탭의 수치는 실측값입니다.</b>
+      </p>
+      <p>
+        <b>측정과 처방의 구분</b> · 이 리포트가 데이터로 말할 수 있는 것은 “프로 분포에서 어디가
+        얼마나 다른가”까지입니다. ‘고치는 법’의 드릴과 큐는 그 차이를 좁히는 데 쓰이는 일반적인
+        코칭 방법이며, 이 데이터에서 도출된 것이 아닙니다. 프로 2,216 퍼스트 서브에서 선수 내
+        편차로 본 지표–구속 상관은 모두 |r| &lt; 0.06 이라, “고치면 빨라진다”는 주장은 하지 않습니다.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ 변화 추적 ============ -->
+  <section class="screen" id="progress" role="tabpanel">
+    <div class="hero">
+      <div class="eyebrow">변화 추적</div>
+      <h1>이전 폼과 현재 폼, 무엇이 달라졌나</h1>
+      <p class="lead" style="margin-top:14px">
+        <b class="hl">seungju_realtime</b>(이전 폼, 실시간본 154프레임)과
+        <b class="hl">seungju_another</b>(현재 폼, 편집본 125프레임)를 같은 자로 재고,
+        각각을 프로 3,149서브 분포 위에 올린 백분위로 비교합니다.
+      </p>
+      <div class="chips">
+        <div class="chip"><i>촬영 조건</i><b>서로 다름</b></div>
+        <div class="chip"><i>비교 가능</i><b class="num">자세 각도 10 / 10</b></div>
+        <div class="chip"><i>시간 지표</i><b>제외 (편집본)</b></div>
+      </div>
+    </div>
+
+    <section class="block">
+      <div class="card" id="deltas"></div>
+      <div class="fignote" style="margin-top:14px">
+        막대는 프로 분포의 5~95% 구간, 빈 동그라미가 이전 폼, 채운 점이 현재 폼입니다.
+        괄호 안은 프로 분포 기준 백분위입니다.
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="note">
+        <p style="margin:0 0 10px">
+          <b class="hl">핵심은 그대로입니다.</b> 임팩트 무릎은 158.6° → 157.4°로 거의 변화가 없고,
+          두 영상 모두 프로 분포 하위 5% 안에 있습니다. 폼을 바꾼 뒤에도 남아 있는 습관이라는 뜻입니다.
+        </p>
+        <p style="margin:0">
+          눈에 띄게 움직인 건 <b class="hl">칠 때 팔꿈치 폄</b>(166.4°→155.6°, 86%→63%)과
+          <b class="hl">토스 팔 폄</b>(175.4°→167.2°, 73%→38%)인데, 둘 다 프로 범위 안에서의 이동입니다.
+        </p>
+      </div>
+      <div class="warnbox">
+        <h3>이 비교는 촬영 조건이 통제되지 않았습니다</h3>
+        <p style="margin:8px 0 0; font-size:13.5px; color:var(--ink-2)">
+          두 영상은 카메라와 촬영 시점이 다릅니다(실시간본 / 편집본). 측정 오차가 상쇄되지 않으므로
+          차이의 일부는 폼 변화가 아니라 촬영 차이일 수 있습니다. 5~10° 수준의 이동은
+          변화로 읽지 마세요. 같은 규격으로 다시 찍으면 이 비교가 훨씬 정확해집니다.
+          스탠스 폭은 프로 데이터셋에 대응 기준이 없고 분포의 편차가 평균의 2배라, 이 표에서 뺐습니다.
+        </p>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============ 영상 접수 (시안) ============ -->
+  <section class="screen" id="intake" role="tabpanel">
+    <div class="hero">
+      <div class="eyebrow">영상 접수 · UI 시안</div>
+      <h1>규격에 맞는 영상만 분석합니다</h1>
+      <p class="lead" style="margin-top:14px">
+        각도가 틀어지거나 슬로모로 찍힌 영상은 <b class="hl">에러 없이 그럴듯한 틀린 숫자</b>를 만듭니다.
+        그래서 업로드 직후 6가지를 먼저 검사하고, 통과하지 못한 항목에 딸린 지표는 리포트에서 제외합니다.
+      </p>
+    </div>
+
+    <section class="block">
+      <div class="drop">
+        <div class="big">영상을 끌어다 놓으세요</div>
+        <div class="sm">MP4 · 서브 1개 · 10초 이내 · 200MB 이하</div>
+        <button class="filebtn" type="button">파일 선택</button>
+      </div>
+
+      <div class="specs">
+        <div><div class="k">위치</div><div class="v">서버 뒤쪽 3–5m, 정면</div><div class="w">측면에서는 2D 각도가 실제와 최대 40° 벌어집니다.</div></div>
+        <div><div class="k">고정</div><div class="v">삼각대 또는 거치</div><div class="w">손으로 들면 골반 기준선이 흔들립니다.</div></div>
+        <div><div class="k">속도</div><div class="v">슬로모 끄기</div><div class="w">템포·스윙 속도 지표가 슬로모에서는 무효입니다.</div></div>
+        <div><div class="k">인물</div><div class="v">화면에 서버 1명만</div><div class="w">뒤에 사람이 걸리면 관절 추적이 옮겨붙습니다.</div></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">업로드 검사 결과 — 예시</div>
+      <div class="checks">
+        <div class="pass"><div class="mk">✓</div><div><div class="t">인물 1명 검출</div><div class="d">전 구간에서 추적 대상이 바뀌지 않았습니다.</div></div><div class="val">1 / 1</div></div>
+        <div class="pass"><div class="mk">✓</div><div><div class="t">프레임 이탈 없음</div><div class="d">라켓과 양 발이 모든 프레임 안에 들어옵니다.</div></div><div class="val">0 프레임</div></div>
+        <div class="pass"><div class="mk">✓</div><div><div class="t">관절 추적 신뢰도</div><div class="d">기준 0.70 이상. 임팩트 구간 최저값 기준입니다.</div></div><div class="val">0.81</div></div>
+        <div class="pass"><div class="mk">✓</div><div><div class="t">서브 동작 검출</div><div class="d">트로피 · 라켓 드롭 · 임팩트 세 지점을 모두 찾았습니다.</div></div><div class="val">f24 / f41 / f58</div></div>
+        <div class="fail"><div class="mk">!</div><div><div class="t">실시간 촬영 아님</div><div class="d">중복 프레임 31%가 검출됐습니다. 슬로모 또는 편집본으로 판정합니다.</div></div><div class="val">중복 31%</div></div>
+        <div class="pass"><div class="mk">✓</div><div><div class="t">오른손잡이</div><div class="d">현재 왼손잡이 서브는 접수하지 않습니다.</div></div><div class="val">R</div></div>
+      </div>
+      <div class="note" style="margin-top:18px">
+        <p style="margin:0">
+          검사 5번이 걸렸습니다. 자세 각도 10개 지표는 그대로 분석하고,
+          <b class="hl">시간·속도 지표 3개는 리포트에서 제외</b>합니다.
+          실시간 영상을 다시 올리면 전체 지표를 받아볼 수 있습니다.
+        </p>
+      </div>
+    </section>
+  </section>
+</div>
+
+<div class="tip" id="tip" role="status"></div>
+
+<script id="scan" type="application/json">[{"name":"두 무릎이 벌어진 각","desc":"골반에서 본 양 무릎 사이 각","user":7.1,"mean":31.2,"sd":12.7,"pct":2.1,"z":-1.9,"ok":true},{"name":"두 발목이 벌어진 각","desc":"골반에서 본 양 발목 사이 각","user":5.1,"mean":19.2,"sd":9.4,"pct":6.7,"z":-1.5,"ok":true},{"name":"왼다리가 몸통에서 벌어진 각","desc":"몸통 대비 왼다리 방향","user":147.7,"mean":169.3,"sd":13.8,"pct":0.9,"z":-1.56,"ok":true},{"name":"오른다리가 몸통에서 벌어진 각","desc":"몸통 대비 오른다리 방향","user":136.9,"mean":152.6,"sd":15.0,"pct":5.0,"z":-1.04,"ok":true},{"name":"오른 무릎 펴짐","desc":"기존 지표 — 비교용","user":157.4,"mean":173.0,"sd":8.2,"pct":4.3,"z":-1.9,"ok":true}]</script>
+<script id="need" type="application/json">[{"key":"impact_knee","sd":6.3,"n3":17,"n5":6,"gap":-15.6,"nhalf":3},{"key":"impact_arm_up","sd":18.3,"n3":143,"n5":52,"gap":-17.7,"nhalf":17},{"key":"impact_elbow","sd":28.8,"n3":353,"n5":127,"gap":15.8,"nhalf":51},{"key":"trophy_knee","sd":16.9,"n3":122,"n5":44,"gap":3.3,"nhalf":398},{"key":"leg_drive","sd":17.1,"n3":124,"n5":45,"gap":-2.7,"nhalf":610},{"key":"trophy_toss_up","sd":11.6,"n3":57,"n5":21,"gap":-23.3,"nhalf":4},{"key":"trophy_toss_arm","sd":12.3,"n3":65,"n5":23,"gap":2.0,"nhalf":604},{"key":"impact_toss_elbow","sd":36.4,"n3":564,"n5":203,"gap":46.4,"nhalf":9},{"key":"trophy_lean","sd":5.9,"n3":15,"n5":5,"gap":-3.2,"nhalf":52},{"key":"trophy_elbow","sd":40.6,"n3":704,"n5":254,"gap":-37.0,"nhalf":19}]</script>
+<script id="sim" type="application/json">{"keys":["impact_knee","impact_arm_up","impact_elbow","trophy_knee","leg_drive","trophy_toss_up","trophy_toss_arm","impact_toss_elbow","trophy_lean","trophy_elbow"],"me_z":[-1.9,-0.79,0.51,0.15,-0.12,-1.12,0.09,1.17,-0.43,-0.76],"me":[157.4,122.3,155.6,114.8,65.2,139.7,167.2,143.9,7.8,46.5],"players":[{"name":"Taylor Fritz","n":185,"speed":182.1,"d":2.41,"dnk":1.89,"z":[-0.41,0.05,-0.07,-0.07,0.06,-0.23,0.18,0.49,-0.3,0.32],"v":[169.6,141.1,137.6,109.9,69.3,158.2,169.2,116.9,8.8,98.8]},{"name":"Li Tu","n":51,"speed":171.7,"d":2.43,"dnk":1.94,"z":[-0.45,0.33,0.27,0.34,-0.34,0.04,0.24,0.98,0.16,0.03],"v":[169.3,147.3,148.2,118.9,60.4,163.8,170.3,136.5,12.2,84.8]},{"name":"Gael Monfils","n":70,"speed":175.7,"d":2.5,"dnk":1.75,"z":[-0.12,-0.53,0.0,0.03,-0.05,-0.81,-0.27,-0.27,-0.25,-0.13],"v":[172.0,128.1,139.8,112.1,66.8,146.2,159.6,86.9,9.1,77.3]},{"name":"Andrey Rublev","n":93,"speed":174.1,"d":2.51,"dnk":1.69,"z":[-0.05,-0.26,0.18,-0.04,0.05,-0.36,0.08,0.0,-0.59,-0.13],"v":[172.6,134.1,145.2,110.5,69.0,155.6,167.0,97.6,6.6,77.4]},{"name":"Christopher O'Connell","n":39,"speed":173.1,"d":2.51,"dnk":1.78,"z":[-0.14,-0.51,-0.18,-0.13,0.12,-0.05,0.02,0.13,0.04,-0.86],"v":[171.8,128.7,134.2,108.6,70.7,162.1,165.7,102.5,11.3,41.7]},{"name":"Matteo Berrettini","n":34,"speed":176.1,"d":2.7,"dnk":2.18,"z":[-0.31,0.2,0.1,0.28,-0.28,0.2,-0.1,-0.12,-0.6,-0.45],"v":[170.5,144.4,142.7,117.8,61.8,167.1,163.1,92.9,6.6,61.8]},{"name":"Sebastian Korda","n":26,"speed":171.6,"d":2.74,"dnk":2.28,"z":[-0.38,0.37,-0.13,0.21,-0.24,0.03,-0.45,-0.06,0.04,-0.58],"v":[169.9,148.2,135.9,116.2,62.6,163.7,155.6,95.0,11.3,55.5]},{"name":"Stefanos Tsitsipas","n":30,"speed":169.0,"d":2.76,"dnk":2.2,"z":[-0.24,-0.99,-0.27,0.11,-0.12,0.25,0.17,-0.09,0.02,-0.06],"v":[171.0,117.9,131.4,113.8,65.2,168.3,168.9,93.8,11.1,80.4]},{"name":"Nuno Borges","n":76,"speed":167.5,"d":2.77,"dnk":2.14,"z":[-0.14,-0.17,-0.02,-0.03,0.03,-0.01,0.15,-0.01,0.34,0.03],"v":[171.8,136.3,139.3,110.9,68.6,162.9,168.5,97.3,13.5,85.0]},{"name":"Diego Schwartzman","n":62,"speed":154.3,"d":2.87,"dnk":2.42,"z":[-0.37,0.06,0.37,-0.23,0.21,0.28,0.17,0.2,0.73,0.02],"v":[170.0,141.3,151.3,106.4,72.7,168.8,168.9,105.3,16.4,84.5]},{"name":"Laslo Djere","n":34,"speed":167.5,"d":2.87,"dnk":2.16,"z":[-0.01,0.31,-0.2,0.38,-0.36,0.29,0.16,0.51,-0.72,-0.23],"v":[172.9,147.0,133.4,119.8,59.8,169.1,168.7,117.8,5.7,72.5]},{"name":"Yunchaokete Bu","n":24,"speed":176.3,"d":2.89,"dnk":2.1,"z":[0.08,0.04,0.1,0.45,-0.44,-0.09,0.05,-0.04,-0.71,0.12],"v":[173.6,140.9,143.0,121.4,58.1,161.1,166.2,96.0,5.8,89.3]},{"name":"Mariano Navone","n":57,"speed":160.4,"d":2.9,"dnk":2.23,"z":[-0.05,-0.11,-0.17,-0.38,0.38,0.19,-0.19,0.77,-0.05,0.43],"v":[172.5,137.6,134.5,103.1,76.3,167.0,161.2,128.0,10.6,104.3]},{"name":"Otto Virtanen","n":50,"speed":185.9,"d":2.91,"dnk":2.21,"z":[-0.02,-0.22,0.51,0.16,-0.17,0.01,0.21,-0.18,0.48,0.02],"v":[172.8,135.2,155.6,115.0,64.2,163.2,169.7,90.3,14.6,84.6]},{"name":"Novak Djokovic","n":87,"speed":178.7,"d":2.93,"dnk":2.53,"z":[-0.42,0.0,-0.3,0.94,-0.93,0.31,-0.12,-0.05,0.05,-0.78],"v":[169.5,140.1,130.5,132.2,47.1,169.4,162.6,95.5,11.3,45.8]},{"name":"Daniil Medvedev","n":64,"speed":175.5,"d":2.94,"dnk":2.13,"z":[0.12,-0.84,-0.23,0.05,-0.09,-0.14,0.12,-0.4,0.2,-0.34],"v":[174.0,121.3,132.8,112.5,65.9,160.2,167.8,81.8,12.4,67.0]},{"name":"Alex de Minaur","n":101,"speed":174.0,"d":2.96,"dnk":2.52,"z":[-0.35,-0.0,0.05,0.72,-0.72,0.4,0.12,-0.32,-0.17,-0.27],"v":[170.1,140.0,141.5,127.5,52.0,171.3,167.8,84.8,9.8,70.5]},{"name":"Casper Ruud","n":110,"speed":173.5,"d":3.01,"dnk":2.25,"z":[0.09,-0.06,0.14,-0.69,0.69,-0.44,0.2,-0.16,-0.02,0.01],"v":[173.7,138.7,144.0,96.1,83.2,153.9,169.6,91.1,10.9,83.8]},{"name":"Carlos Alcaraz","n":89,"speed":177.5,"d":3.02,"dnk":2.15,"z":[0.23,0.08,-0.13,-0.05,0.05,-0.1,0.0,0.14,-0.03,0.27],"v":[174.8,141.9,135.8,110.3,68.9,160.9,165.3,102.9,10.8,96.8]},{"name":"Zhizhen Zhang","n":24,"speed":177.7,"d":3.02,"dnk":2.33,"z":[0.02,-0.36,-0.47,0.28,-0.28,-0.37,0.19,-0.09,0.79,-0.01],"v":[173.1,132.1,125.3,117.7,61.7,155.4,169.2,93.9,16.8,83.1]},{"name":"Brandon Nakashima","n":71,"speed":175.4,"d":3.03,"dnk":2.47,"z":[-0.13,0.36,0.26,0.13,-0.14,0.27,-0.28,0.13,0.79,-0.61],"v":[171.9,148.1,147.9,114.4,64.8,168.7,159.3,102.6,16.8,53.8]},{"name":"Tommy Paul","n":90,"speed":169.4,"d":3.03,"dnk":2.49,"z":[-0.18,0.11,-0.29,0.16,-0.16,-0.07,-0.45,-0.0,0.89,-0.31],"v":[171.5,142.4,130.7,115.0,64.4,161.6,155.8,97.3,17.6,68.6]},{"name":"Alex Michelsen","n":32,"speed":174.7,"d":3.04,"dnk":2.18,"z":[0.22,-0.31,0.05,-0.15,0.15,-0.51,-0.26,-0.4,-0.61,0.32],"v":[174.8,133.0,141.4,108.1,71.2,152.4,159.8,81.7,6.5,99.1]},{"name":"Thanasi Kokkinakis","n":94,"speed":167.1,"d":3.07,"dnk":2.54,"z":[-0.18,-0.08,-0.35,-0.35,0.35,0.42,-0.04,-0.21,-0.25,-0.13],"v":[171.5,138.2,129.1,103.6,75.7,171.7,164.3,89.0,9.1,77.1]},{"name":"Gabriel Diallo","n":46,"speed":183.9,"d":3.1,"dnk":2.32,"z":[0.16,0.44,-0.01,0.07,-0.06,0.09,-0.44,0.01,-0.01,-0.23],"v":[174.3,149.9,139.5,113.0,66.5,165.0,155.9,98.0,10.9,72.2]},{"name":"Jannik Sinner","n":214,"speed":175.9,"d":3.11,"dnk":2.21,"z":[0.28,0.21,0.05,-0.2,0.21,-0.63,-0.34,0.02,-0.5,0.53],"v":[175.3,144.7,141.2,107.0,72.5,150.0,157.9,98.1,7.3,109.1]},{"name":"Radu Albot","n":23,"speed":170.0,"d":3.14,"dnk":2.69,"z":[-0.28,-0.34,0.24,-0.92,0.92,-0.2,0.38,-0.02,-0.7,0.75],"v":[170.7,132.3,147.2,91.2,88.5,158.8,173.3,96.5,5.8,120.1]},{"name":"Lorenzo Musetti","n":34,"speed":165.4,"d":3.15,"dnk":2.67,"z":[-0.24,0.1,-0.12,0.29,-0.3,0.33,0.17,0.2,0.96,0.18],"v":[171.0,142.2,136.1,117.8,61.2,170.0,168.9,105.6,18.1,92.5]},{"name":"Tomas Machac","n":46,"speed":169.9,"d":3.17,"dnk":2.76,"z":[-0.35,0.81,0.28,0.11,-0.1,0.41,0.27,0.39,-0.61,0.63],"v":[170.1,158.1,148.3,113.9,65.6,171.5,171.0,112.8,6.5,114.2]},{"name":"Jiri Lehecka","n":53,"speed":181.8,"d":3.19,"dnk":2.9,"z":[-0.57,-0.76,-0.12,-0.15,0.16,0.31,0.22,-1.06,0.28,-0.23],"v":[168.3,123.0,136.0,108.1,71.4,169.4,169.8,55.3,13.1,72.2]},{"name":"Grigor Dimitrov","n":133,"speed":179.5,"d":3.21,"dnk":2.39,"z":[0.25,-0.07,-0.1,-0.06,0.07,0.01,0.33,-0.36,-0.77,0.2],"v":[175.0,138.4,136.6,110.1,69.5,163.3,172.3,83.3,5.3,93.2]},{"name":"Botic van De Zandschulp","n":115,"speed":173.0,"d":3.3,"dnk":2.77,"z":[-0.11,0.02,0.04,-1.08,1.09,0.34,0.1,0.01,0.01,-0.37],"v":[172.0,140.3,141.0,87.5,92.1,170.2,167.4,98.0,11.1,65.7]},{"name":"Alexei Popyrin","n":94,"speed":183.3,"d":3.34,"dnk":2.72,"z":[0.04,-0.46,-0.06,-0.58,0.59,0.05,0.01,-0.16,1.19,-0.43],"v":[173.3,129.8,137.9,98.5,81.1,164.1,165.4,91.1,19.8,62.7]},{"name":"Aleksandar Kovacevic","n":31,"speed":173.6,"d":3.35,"dnk":2.71,"z":[0.06,0.39,-0.29,-0.49,0.48,0.18,0.27,0.48,1.09,-0.68],"v":[173.5,148.6,130.9,100.7,78.6,166.9,171.0,116.4,19.1,50.4]},{"name":"Flavio Cobolli","n":27,"speed":156.2,"d":3.36,"dnk":2.69,"z":[0.12,0.49,0.38,0.65,-0.64,0.43,0.34,-0.35,0.11,-0.78],"v":[173.9,150.8,151.7,125.8,53.7,171.9,172.5,83.8,11.8,45.7]},{"name":"Lorenzo Sonego","n":71,"speed":172.0,"d":3.39,"dnk":2.56,"z":[0.32,0.06,-0.0,-0.21,0.22,-0.18,0.03,-0.03,1.22,-0.24],"v":[175.5,141.2,139.8,106.8,72.8,159.3,166.0,96.2,20.0,71.9]},{"name":"David Goffin","n":66,"speed":152.1,"d":3.45,"dnk":2.64,"z":[0.32,0.44,-0.4,0.04,-0.02,0.42,0.03,-0.13,0.17,-1.17],"v":[175.6,149.7,127.3,112.3,67.4,171.7,165.8,92.5,12.3,26.8]},{"name":"Frances Tiafoe","n":217,"speed":173.5,"d":3.45,"dnk":2.51,"z":[0.47,0.01,0.38,0.99,-0.98,-0.31,-0.55,0.11,-0.56,0.64],"v":[176.8,140.2,151.5,133.4,46.2,156.6,153.5,101.8,6.8,114.7]},{"name":"Daniel Evans","n":75,"speed":159.1,"d":3.49,"dnk":2.71,"z":[0.3,0.14,-0.03,0.88,-0.87,0.6,0.12,0.72,0.82,-0.15],"v":[175.4,143.1,138.8,131.0,48.6,175.4,167.8,126.1,17.0,76.3]},{"name":"Dominic Thiem","n":24,"speed":185.2,"d":3.54,"dnk":2.63,"z":[0.47,0.29,-0.16,-0.15,0.14,0.4,0.2,-0.02,0.6,-0.2],"v":[176.8,146.3,134.8,108.2,71.1,171.3,169.6,96.7,15.5,73.6]},{"name":"Arthur Rinderknech","n":20,"speed":175.1,"d":3.58,"dnk":2.78,"z":[0.34,0.08,0.15,-0.52,0.53,0.57,0.4,-0.54,-0.41,-1.05],"v":[175.8,141.9,144.4,100.0,79.7,175.0,173.6,76.1,7.9,32.8]},{"name":"Mackenzie McDonald","n":26,"speed":175.0,"d":3.59,"dnk":3.08,"z":[-0.05,0.52,0.21,-0.15,0.16,0.08,0.15,-0.6,1.23,-0.39],"v":[172.5,151.5,146.1,108.1,71.5,164.7,168.4,73.6,20.1,64.6]},{"name":"Jakub Mensik","n":34,"speed":172.5,"d":3.61,"dnk":2.8,"z":[0.37,0.19,0.3,-0.11,0.13,0.53,0.39,0.12,-0.73,0.88],"v":[176.0,144.3,149.2,109.0,70.7,174.0,173.5,102.4,5.6,126.4]},{"name":"Alexander Zverev","n":91,"speed":194.8,"d":3.76,"dnk":3.16,"z":[0.13,0.23,-0.4,-0.61,0.59,0.13,0.31,-0.49,-0.21,0.85],"v":[174.0,145.1,127.3,98.0,81.1,165.8,171.9,78.0,9.4,124.5]}]}</script>
+<script id="data" type="application/json">{"n_serves": 3149, "n_players": 55, "azim": 190.0, "azim_prev": 190.0, "n_frames": 125, "metrics": [{"key": "impact_knee", "name": "칠 때 무릎 펴짐", "desc": "180도 = 완전히 편 상태", "dir": "low", "user": 157.4, "prev": 158.6, "mean": 173.0, "sd": 8.2, "p5": 159.1, "p50": 175.0, "p95": 179.5, "lo": 131.7, "hi": 179.9, "pct": 4.3, "pct_prev": 4.9, "z": -1.9, "band": "crit", "hist": [17, 2, 1, 2, 4, 2, 0, 5, 5, 3, 7, 6, 7, 9, 9, 8, 8, 22, 17, 18, 14, 30, 21, 34, 49, 62, 71, 93, 151, 232, 252, 309, 358, 424, 424, 473]}, {"key": "impact_arm_up", "name": "칠 때 팔 들림", "desc": "몸통과 위팔이 이루는 각", "dir": "low", "user": 122.3, "prev": 125.8, "mean": 140.0, "sd": 22.3, "p5": 106.7, "p50": 143.8, "p95": 165.4, "lo": 6.1, "hi": 177.4, "pct": 12.0, "pct_prev": 15.4, "z": -0.79, "band": "warn", "hist": [26, 3, 1, 3, 5, 1, 4, 3, 1, 0, 2, 1, 2, 1, 2, 4, 8, 12, 15, 22, 37, 45, 55, 74, 139, 176, 229, 316, 425, 480, 416, 282, 149, 94, 54, 62]}, {"key": "impact_elbow", "name": "칠 때 팔꿈치 펴짐", "desc": "180도 = 곧게 편 상태", "dir": "low", "user": 155.6, "prev": 166.4, "mean": 139.8, "sd": 31.0, "p5": 75.1, "p50": 148.8, "p95": 173.3, "lo": 13.6, "hi": 179.2, "pct": 63.0, "pct_prev": 85.5, "z": 0.51, "band": "ok", "hist": [20, 5, 8, 1, 4, 4, 4, 9, 12, 15, 17, 25, 25, 28, 20, 41, 38, 45, 51, 53, 68, 56, 69, 88, 108, 112, 172, 182, 207, 250, 285, 318, 297, 228, 162, 122]}, {"key": "trophy_knee", "name": "앉았을 때 무릎 굽힘", "desc": "작을수록 깊게 앉음", "dir": "high", "user": 114.8, "prev": 109.4, "mean": 111.5, "sd": 22.2, "p5": 84.5, "p50": 107.0, "p95": 153.7, "lo": 29.5, "hi": 175.0, "pct": 63.2, "pct_prev": 55.4, "z": 0.15, "band": "ok", "hist": [18, 0, 1, 0, 0, 0, 0, 1, 1, 1, 4, 20, 59, 101, 171, 262, 275, 312, 302, 259, 185, 163, 155, 112, 141, 114, 115, 91, 57, 41, 37, 41, 26, 22, 28, 34]}, {"key": "leg_drive", "name": "앉았다 펴는 양", "desc": "앉은 각도에서 편 각도까지", "dir": "low", "user": 65.2, "prev": 70.2, "mean": 67.9, "sd": 22.2, "p5": 25.7, "p50": 72.2, "p95": 94.9, "lo": 3.9, "hi": 150.5, "pct": 37.7, "pct_prev": 45.3, "z": -0.12, "band": "ok", "hist": [37, 22, 21, 30, 39, 37, 38, 50, 93, 120, 114, 144, 115, 156, 165, 188, 269, 302, 287, 288, 253, 178, 101, 56, 20, 4, 1, 1, 1, 0, 0, 0, 0, 1, 0, 18]}, {"key": "trophy_toss_up", "name": "토스 팔 들림", "desc": "몸통 대비 왼팔이 올라간 각", "dir": "low", "user": 139.7, "prev": 144.8, "mean": 163.0, "sd": 20.8, "p5": 143.4, "p50": 167.4, "p95": 178.9, "lo": 18.5, "hi": 179.9, "pct": 3.2, "pct_prev": 5.8, "z": -1.12, "band": "warn", "hist": [22, 4, 5, 4, 2, 2, 2, 4, 2, 2, 0, 1, 2, 2, 2, 3, 2, 0, 1, 2, 0, 2, 1, 4, 5, 9, 16, 68, 125, 191, 268, 348, 382, 490, 574, 602]}, {"key": "trophy_toss_arm", "name": "토스 팔 펴짐", "desc": "왼 팔꿈치가 곧게 펴졌는가", "dir": "low", "user": 167.2, "prev": 175.4, "mean": 165.2, "sd": 21.2, "p5": 142.2, "p50": 170.7, "p95": 179.3, "lo": 16.5, "hi": 179.9, "pct": 37.5, "pct_prev": 72.7, "z": 0.09, "band": "ok", "hist": [17, 2, 3, 0, 8, 2, 3, 3, 4, 4, 4, 3, 2, 2, 1, 1, 2, 4, 5, 4, 4, 2, 7, 10, 11, 15, 15, 36, 81, 118, 151, 199, 379, 488, 692, 867]}, {"key": "impact_toss_elbow", "name": "칠 때 토스 팔 접힘", "desc": "프로는 몸쪽으로 접어 당긴다", "dir": "high", "user": 143.9, "prev": 127.4, "mean": 97.5, "sd": 39.7, "p5": 28.4, "p50": 98.7, "p95": 162.6, "lo": 2.4, "hi": 177.8, "pct": 86.4, "pct_prev": 76.4, "z": 1.17, "band": "warn", "hist": [35, 28, 26, 30, 29, 41, 53, 47, 60, 61, 70, 91, 98, 123, 115, 115, 139, 171, 140, 147, 143, 150, 145, 169, 110, 102, 105, 94, 80, 81, 63, 72, 66, 53, 44, 53]}, {"key": "trophy_lean", "name": "상체 젖힘", "desc": "수직에서 벗어난 각", "dir": "low", "user": 7.8, "prev": 6.6, "mean": 11.0, "sd": 7.4, "p5": 1.0, "p50": 10.2, "p95": 23.7, "lo": 0.1, "hi": 33.3, "pct": 37.4, "pct_prev": 31.2, "z": -0.43, "band": "ok", "hist": [157, 139, 121, 152, 152, 123, 120, 158, 155, 158, 139, 159, 129, 140, 141, 136, 120, 98, 111, 70, 53, 64, 72, 51, 48, 34, 24, 21, 21, 14, 20, 9, 9, 7, 1, 23]}, {"key": "trophy_elbow", "name": "앉았을 때 팔꿈치", "desc": "치는 팔의 굽힘", "dir": "both", "user": 46.5, "prev": 61.1, "mean": 83.5, "sd": 48.5, "p5": 12.6, "p50": 78.0, "p95": 164.8, "lo": 1.1, "hi": 178.4, "pct": 27.7, "pct_prev": 40.3, "z": -0.76, "band": "warn", "hist": [66, 66, 82, 85, 90, 96, 128, 123, 112, 140, 149, 112, 120, 95, 67, 76, 79, 63, 81, 74, 86, 96, 89, 90, 108, 82, 99, 77, 76, 60, 61, 77, 70, 54, 47, 73]}], "players": [{"name": "Jiri Lehecka", "n": 53, "mean": 168.3, "sd": 12.5, "p5": 144.1, "p95": 179.4, "below": 18.9}, {"name": "Li Tu", "n": 51, "mean": 169.3, "sd": 5.8, "p5": 157.5, "p95": 177.1, "below": 5.9}, {"name": "Novak Djokovic", "n": 87, "mean": 169.5, "sd": 13.0, "p5": 141.9, "p95": 179.7, "below": 21.8}, {"name": "Taylor Fritz", "n": 185, "mean": 169.6, "sd": 5.4, "p5": 160.2, "p95": 177.9, "below": 1.1}, {"name": "Sebastian Korda", "n": 26, "mean": 169.9, "sd": 10.8, "p5": 147.9, "p95": 179.1, "below": 19.2}, {"name": "Diego Schwartzman", "n": 62, "mean": 170.0, "sd": 7.4, "p5": 163.2, "p95": 179.0, "below": 3.2}, {"name": "Alex de Minaur", "n": 101, "mean": 170.1, "sd": 5.8, "p5": 161.0, "p95": 178.3, "below": 2.0}, {"name": "Tomas Machac", "n": 46, "mean": 170.1, "sd": 15.3, "p5": 126.7, "p95": 179.4, "below": 10.9}, {"name": "Matteo Berrettini", "n": 34, "mean": 170.5, "sd": 6.3, "p5": 163.6, "p95": 177.1, "below": 2.9}, {"name": "Radu Albot", "n": 23, "mean": 170.7, "sd": 24.0, "p5": 171.9, "p95": 179.7, "below": 4.3}, {"name": "Lorenzo Musetti", "n": 34, "mean": 171.0, "sd": 6.9, "p5": 155.9, "p95": 178.8, "below": 8.8}, {"name": "Stefanos Tsitsipas", "n": 30, "mean": 171.0, "sd": 7.4, "p5": 158.0, "p95": 179.1, "below": 6.7}, {"name": "Thanasi Kokkinakis", "n": 94, "mean": 171.5, "sd": 9.2, "p5": 150.6, "p95": 178.9, "below": 9.6}, {"name": "Tommy Paul", "n": 90, "mean": 171.5, "sd": 8.8, "p5": 152.0, "p95": 178.9, "below": 13.3}, {"name": "Christopher O'Connell", "n": 39, "mean": 171.8, "sd": 6.0, "p5": 163.0, "p95": 178.1, "below": 2.6}, {"name": "Nuno Borges", "n": 76, "mean": 171.8, "sd": 4.1, "p5": 164.7, "p95": 178.1, "below": 1.3}, {"name": "Brandon Nakashima", "n": 71, "mean": 171.9, "sd": 6.4, "p5": 157.8, "p95": 177.7, "below": 4.2}, {"name": "Botic van De Zandschulp", "n": 115, "mean": 172.0, "sd": 17.1, "p5": 156.0, "p95": 179.1, "below": 6.1}, {"name": "Gael Monfils", "n": 70, "mean": 172.0, "sd": 8.8, "p5": 150.2, "p95": 178.8, "below": 8.6}, {"name": "Mackenzie McDonald", "n": 26, "mean": 172.5, "sd": 7.2, "p5": 155.7, "p95": 179.4, "below": 7.7}, {"name": "Mariano Navone", "n": 57, "mean": 172.5, "sd": 3.6, "p5": 167.3, "p95": 178.1, "below": 0.0}, {"name": "Andrey Rublev", "n": 93, "mean": 172.6, "sd": 7.5, "p5": 162.1, "p95": 179.2, "below": 4.3}, {"name": "Otto Virtanen", "n": 50, "mean": 172.8, "sd": 4.2, "p5": 166.7, "p95": 179.6, "below": 0.0}, {"name": "Laslo Djere", "n": 34, "mean": 172.9, "sd": 4.3, "p5": 164.4, "p95": 178.6, "below": 0.0}, {"name": "Zhizhen Zhang", "n": 24, "mean": 173.1, "sd": 9.9, "p5": 150.5, "p95": 179.4, "below": 16.7}, {"name": "Alexei Popyrin", "n": 94, "mean": 173.3, "sd": 8.2, "p5": 163.2, "p95": 178.9, "below": 2.1}, {"name": "Aleksandar Kovacevic", "n": 31, "mean": 173.5, "sd": 6.0, "p5": 164.3, "p95": 179.2, "below": 3.2}, {"name": "Yunchaokete Bu", "n": 24, "mean": 173.6, "sd": 3.4, "p5": 166.4, "p95": 178.1, "below": 0.0}, {"name": "Casper Ruud", "n": 110, "mean": 173.7, "sd": 5.8, "p5": 163.3, "p95": 179.2, "below": 3.6}, {"name": "Flavio Cobolli", "n": 27, "mean": 173.9, "sd": 3.7, "p5": 168.2, "p95": 179.3, "below": 0.0}, {"name": "Alexander Zverev", "n": 91, "mean": 174.0, "sd": 11.8, "p5": 153.2, "p95": 179.8, "below": 6.6}, {"name": "Daniil Medvedev", "n": 64, "mean": 174.0, "sd": 6.5, "p5": 158.9, "p95": 179.7, "below": 3.1}, {"name": "Gabriel Diallo", "n": 46, "mean": 174.3, "sd": 6.2, "p5": 160.5, "p95": 179.4, "below": 2.2}, {"name": "Alex Michelsen", "n": 32, "mean": 174.8, "sd": 5.5, "p5": 168.3, "p95": 179.2, "below": 3.1}, {"name": "Carlos Alcaraz", "n": 89, "mean": 174.8, "sd": 4.9, "p5": 162.8, "p95": 179.8, "below": 2.2}, {"name": "Grigor Dimitrov", "n": 133, "mean": 175.0, "sd": 3.6, "p5": 170.2, "p95": 179.4, "below": 0.8}, {"name": "Jannik Sinner", "n": 214, "mean": 175.3, "sd": 6.4, "p5": 169.9, "p95": 179.5, "below": 1.9}, {"name": "Daniel Evans", "n": 75, "mean": 175.4, "sd": 6.4, "p5": 163.3, "p95": 179.8, "below": 1.3}, {"name": "Lorenzo Sonego", "n": 71, "mean": 175.5, "sd": 3.6, "p5": 171.0, "p95": 179.6, "below": 1.4}, {"name": "David Goffin", "n": 66, "mean": 175.6, "sd": 5.1, "p5": 169.1, "p95": 179.6, "below": 1.5}, {"name": "Arthur Rinderknech", "n": 20, "mean": 175.8, "sd": 2.4, "p5": 173.1, "p95": 178.4, "below": 0.0}, {"name": "Jakub Mensik", "n": 34, "mean": 176.0, "sd": 6.1, "p5": 166.4, "p95": 179.4, "below": 2.9}, {"name": "Dominic Thiem", "n": 24, "mean": 176.8, "sd": 2.2, "p5": 174.0, "p95": 179.6, "below": 0.0}, {"name": "Frances Tiafoe", "n": 217, "mean": 176.8, "sd": 3.2, "p5": 169.7, "p95": 179.8, "below": 0.0}], "poses": {"pro_trophy": [[0.0, 0.0], [0.07181101324298313, -0.04005467763640323], [0.38058433228487537, -0.7682130069776674], [-0.3024516991299088, -1.3490641684605416], [-0.06433141449233386, 0.03821237425769559], [0.23283216864314876, -0.6785004263151962], [-0.2821712380558651, -1.289152154104499], [-0.10212968598087487, 0.4846690687222831], [-0.1623135407794774, 0.9840716631648527], [-0.1312163855811477, 1.317219888696965], [-0.21871191302869428, 1.3649953771161414], [-0.17272222388549657, 1.1984926215782503], [-0.19544967976523314, 1.676542798318104], [-0.17562797639035355, 2.1232591004207912], [-0.18394319727474168, 0.7419095464148991], [-0.19900895066354568, 0.35751680979899664], [-0.007148829348878684, 0.5154916909984314]], "pro_impact": [[0.0, 0.0], [0.2598918046012718, 0.037778126983162796], [0.29332503697314616, -0.849139556081521], [0.3752590667801741, -1.7181163718938672], [-0.25335682335511533, -0.030599826015333613], [-0.21792987876172867, -0.8674116831847722], [-0.23901978317590916, -1.7035378532086447], [-0.11059683072254868, 0.47936059784893303], [-0.27302460765112807, 0.9610909300567764], [-0.39047415145146164, 1.2462638801585169], [-0.40962350326114255, 1.2887015661492727], [-0.5238944405466159, 0.7221585271457367], [-0.4641168530128369, 0.3077530081034867], [-0.14983094732238747, 0.39965115957746616], [-0.019143744673630163, 1.1524990184614023], [0.16274486515195408, 1.5939210859188429], [0.10353520399977416, 1.895334559136196]], "user_trophy": [[-0.13238629525181908, 1.3933374240470378], [-0.16380770181009435, 1.4285978123811052], [-0.1744533585876648, 1.4045508175660986], [-0.32359073351165346, 1.3200837325046608], [-0.21093222285229934, 1.2507136069099225], [-0.22838929762865304, 1.179416875931781], [-0.06823014626460283, 0.7984650480920273], [0.04327439322345123, 1.6274157094332569], [0.06416919222897982, 0.3173145627248768], [0.21044084836258836, 2.13034983144466], [0.33319530244664125, 0.7629769959017232], [-0.05038224853504272, 0.06559137988090877], [0.05038224853504272, -0.06559137988090877], [0.3472350478809413, -0.7727323921414678], [0.5817231282083865, -0.7660286401746965], [0.0073921979820371795, -1.4657867032973781], [0.18400765175440037, -1.5131645003796466]], "user_impact": [[-0.7801714033197874, 1.2676267817869422], [-0.7985197673680703, 1.2529391561225576], [-0.7983458312070283, 1.2907374799057227], [-0.9346652083935326, 1.0405269855988817], [-0.7953998468838056, 1.16310255465059], [-0.7236388243332407, 0.6318606485827561], [-0.40825074364773406, 1.0170256439708756], [-0.6125406657332426, 0.12207657186839098], [-0.06492404828599908, 1.5901034738880304], [-0.43118085230969494, -0.03877920967494318], [-0.016383027999131786, 2.016599217881789], [-0.06863611209446699, -0.07080342319400838], [0.06863611209446699, 0.07080342319400838], [0.10456295882248604, -0.8747068949346595], [0.1787980569314793, -0.7235183521561255], [-0.15684645798423297, -1.6186708250152386], [-0.010530979127351757, -1.444446671313128]], "h36m_bones": [[0, 1, "R"], [1, 2, "R"], [2, 3, "R"], [0, 4, "L"], [4, 5, "L"], [5, 6, "L"], [0, 7, "C"], [7, 8, "C"], [8, 9, "C"], [9, 10, "C"], [8, 11, "L"], [11, 12, "L"], [12, 13, "L"], [8, 14, "R"], [14, 15, "R"], [15, 16, "R"]], "coco_bones": [[11, 13], [13, 15], [12, 14], [14, 16], [11, 12], [5, 6], [5, 7], [7, 9], [6, 8], [8, 10], [0, 5], [0, 6]]}, "overall_below": 4.3, "players_below": 0}</script>
+<script>
+(function () {
+  "use strict";
+  var D = JSON.parse(document.getElementById("data").textContent);
+  var SVG = "http://www.w3.org/2000/svg";
+  var S = JSON.parse(document.getElementById("sim").textContent);
+  var NEED = JSON.parse(document.getElementById("need").textContent);
+  var SCAN = JSON.parse(document.getElementById("scan").textContent);
+  var KNEE = D.metrics.filter(function (m) { return m.key === "impact_knee"; })[0];
+
+  function el(tag, attrs, text) {
+    var n = document.createElementNS(SVG, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function fmt(v, d) { return Number(v).toFixed(d == null ? 1 : d); }
+  function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); }
+  function widthOf(node, fallback) {
+    var w = Math.round(node.getBoundingClientRect().width);
+    return w > 40 ? w : fallback;
+  }
+
+  /* ---------- tooltip ---------- */
+  var tip = document.getElementById("tip");
+  function showTip(e, html) {
+    tip.innerHTML = html;
+    tip.style.opacity = "1";
+    var r = tip.getBoundingClientRect();
+    tip.style.left = Math.max(8, Math.min(e.clientX + 14, window.innerWidth - r.width - 8)) + "px";
+    tip.style.top = Math.max(8, e.clientY - r.height - 12) + "px";
+  }
+  function hideTip() { tip.style.opacity = "0"; }
+  function hoverable(node, html) {
+    node.addEventListener("mousemove", function (e) { showTip(e, html); });
+    node.addEventListener("mouseleave", hideTip);
+  }
+
+  /* ---------- header chips ---------- */
+  document.getElementById("chip-n").textContent =
+    "남자 프로 " + D.n_serves.toLocaleString() + "서브 · " + D.n_players + "명";
+  document.getElementById("chip-az").textContent = "방위각 " + (D.azim % 180) + "° (서버 뒤/앞)";
+
+  /* ---------- 한눈에 — z 편차 막대 ---------- */
+  /* 감점 방향을 지킨다. 유리한 쪽으로 벗어난 것은 문제가 아니므로 중립색으로 둔다. */
+  function drawTornado() {
+    var svg = document.getElementById("tor");
+    var W = Math.max(300, widthOf(svg, 620));
+    var padL = 132, padR = 40, padT = 26, padB = 26, rowH = 30;
+    var ms = D.metrics.slice().sort(function (a, b) {
+      var o = { crit: 0, warn: 1, ok: 2 };
+      return (o[a.band] - o[b.band]) || (Math.abs(b.z) - Math.abs(a.z));
+    });
+    var H = padT + ms.length * rowH + padB;
+    clear(svg);
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    svg.style.height = H + "px";
+
+    var lim = 3;
+    function x(z) { return padL + (Math.max(-lim, Math.min(lim, z)) + lim) / (2 * lim) * (W - padL - padR); }
+
+    svg.appendChild(el("rect", { class: "zone", x: x(-1), y: padT - 8,
+      width: x(1) - x(-1), height: H - padT - padB + 12, rx: 2 }));
+    [-2, 2].forEach(function (v) {
+      svg.appendChild(el("line", { class: "zline", x1: x(v), x2: x(v), y1: padT - 8, y2: H - padB + 4 }));
+    });
+    svg.appendChild(el("line", { class: "mid", x1: x(0), x2: x(0), y1: padT - 8, y2: H - padB + 4 }));
+    svg.appendChild(el("text", { class: "cap", x: x(0), y: padT - 14, "text-anchor": "middle" }, "프로 평균"));
+    svg.appendChild(el("text", { class: "cap", x: x(1), y: H - 6, "text-anchor": "middle" }, "+1 SD"));
+    svg.appendChild(el("text", { class: "cap", x: x(-1), y: H - 6, "text-anchor": "middle" }, "−1 SD"));
+
+    ms.forEach(function (m, i) {
+      var y = padT + i * rowH + rowH / 2;
+      var g = el("g", {});
+      var x0 = x(0), x1 = x(m.z), lo = Math.min(x0, x1), w = Math.abs(x1 - x0);
+      g.appendChild(el("rect", { x: lo, y: y - 7, width: Math.max(1.5, w), height: 14, rx: 2,
+        fill: "var(--" + m.band + ")", opacity: m.band === "ok" ? .38 : .92 }));
+      g.appendChild(el("text", { class: "lab", x: padL - 12, y: y + 4, "text-anchor": "end" }, m.name));
+      g.appendChild(el("text", { class: "val", x: x1 + (m.z < 0 ? -7 : 7), y: y + 4,
+        "text-anchor": m.z < 0 ? "end" : "start",
+        fill: m.band === "ok" ? "var(--ink-3)" : "var(--" + m.band + ")" },
+        (m.z > 0 ? "+" : "−") + fmt(Math.abs(m.z), 1)));
+      g.appendChild(el("rect", { x: 0, y: y - rowH / 2, width: W, height: rowH, fill: "transparent" }));
+      hoverable(g, "<b>" + m.name + "</b><br><span class='num'>내 " + fmt(m.user) + "° · 프로 " +
+        fmt(m.mean) + "±" + fmt(m.sd) + "°<br>" + fmt(m.pct) + "%ile · z " +
+        (m.z > 0 ? "+" : "") + fmt(m.z, 2) + "</span><br>" + m.desc);
+      svg.appendChild(g);
+    });
+  }
+
+  function buildTally() {
+    var c = { crit: 0, warn: 0, ok: 0 };
+    D.metrics.forEach(function (m) { c[m.band]++; });
+    var rows = [
+      ["crit", "●", c.crit, "프로 범위 밖", "지금 고칠 곳"],
+      ["warn", "●", c.warn, "경계", "같이 따라오는 항목"],
+      ["ok", "●", c.ok, "프로 범위 안", "손대지 말 것"]
+    ];
+    var wrap = document.getElementById("tally");
+    wrap.innerHTML = "";
+    rows.forEach(function (r) {
+      var d = document.createElement("div");
+      d.className = r[0];
+      d.innerHTML = '<div class="cnt"></div><div class="t"></div><div></div><div class="w"></div>';
+      d.querySelector(".cnt").textContent = r[2];
+      d.querySelector(".t").textContent = r[3];
+      d.querySelector(".w").textContent = r[4];
+      wrap.appendChild(d);
+    });
+  }
+
+  /* ---------- 다음에 할 것 — 필요한 서브 수 ---------- */
+  function buildNeed() {
+    var tb = document.getElementById("needtb");
+    var focus = { impact_knee: 1, trophy_toss_up: 1, impact_arm_up: 1 };
+    NEED.slice().sort(function (a, b) {
+      return (focus[b.key] ? 1 : 0) - (focus[a.key] ? 1 : 0) ||
+        (a.nhalf == null ? 1e9 : a.nhalf) - (b.nhalf == null ? 1e9 : b.nhalf);
+    }).forEach(function (r) {
+      var m = D.metrics.filter(function (x) { return x.key === r.key; })[0];
+      var tr = document.createElement("tr");
+      if (focus[r.key]) tr.className = "focus";
+      tr.innerHTML = '<td class="k"></td><td class="n"></td><td class="n"></td><td class="n"></td>';
+      var td = tr.querySelectorAll("td");
+      td[0].textContent = m.name;
+      td[1].textContent = fmt(r.sd) + "°";
+      td[2].textContent = r.n3 + "개";
+      td[3].textContent = r.nhalf == null ? "—" : r.nhalf + "개";
+      if (r.nhalf != null && r.nhalf > 100) td[3].innerHTML = "<small>" + r.nhalf + "개</small>";
+      tb.appendChild(tr);
+    });
+  }
+
+  function buildScan() {
+    var tb = document.getElementById("scantb");
+    SCAN.forEach(function (r, i) {
+      var tr = document.createElement("tr");
+      if (i < SCAN.length - 1) tr.className = "hit";
+      tr.innerHTML = '<td><b></b><br><small></small></td><td class="n v"></td>' +
+        '<td class="n v"></td><td class="n v"></td><td class="n v"></td>';
+      var td = tr.querySelectorAll("td");
+      td[0].querySelector("b").textContent = r.name;
+      td[0].querySelector("small").textContent = r.desc;
+      td[1].textContent = fmt(r.user) + "\u00b0";
+      td[2].textContent = fmt(r.mean) + "\u00b1" + fmt(r.sd) + "\u00b0";
+      td[3].textContent = fmt(r.pct) + "%";
+      td[4].textContent = (r.z > 0 ? "+" : "\u2212") + fmt(Math.abs(r.z), 2);
+      tb.appendChild(tr);
+    });
+  }
+
+  /* ---------- 근거 1 — 선수별 스트립 ---------- */
+  function drawPlayers() {
+    var svg = document.getElementById("players");
+    var P = D.players, ME = KNEE.user;
+    var W = Math.max(520, widthOf(svg, 900));
+    var rowH = 9, padT = 34, padB = 34, padL = 132, padR = 24;
+    var H = padT + P.length * rowH + padB;
+    clear(svg);
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    svg.style.height = H + "px";
+
+    var lo = 138, hi = 182;
+    function x(v) { return padL + (v - lo) / (hi - lo) * (W - padL - padR); }
+
+    for (var g = 140; g <= 180; g += 10) {
+      svg.appendChild(el("line", { class: "grid", x1: x(g), x2: x(g), y1: padT - 12, y2: H - padB + 4 }));
+      svg.appendChild(el("text", { class: "tick", x: x(g), y: H - padB + 18, "text-anchor": "middle" }, g + "°"));
+    }
+
+    P.forEach(function (p, i) {
+      var y = padT + i * rowH + rowH / 2;
+      var g = el("g", { class: "row" });
+      g.appendChild(el("line", { class: "whisk", x1: x(p.p5), x2: x(p.p95), y1: y, y2: y }));
+      g.appendChild(el("circle", { class: "dot", cx: x(p.mean), cy: y, r: 3.1 }));
+      g.appendChild(el("rect", { x: padL - 4, y: y - rowH / 2, width: W - padL - padR + 8, height: rowH, fill: "transparent" }));
+      hoverable(g, "<b>" + p.name + "</b><br><span class='num'>평균 " + fmt(p.mean) + "° ± " + fmt(p.sd) +
+        "<br>5~95% " + fmt(p.p5, 0) + "~" + fmt(p.p95, 0) + "° · 서브 " + p.n + "개" +
+        "<br>157.4° 미만 " + fmt(p.below) + "%</span>");
+      svg.appendChild(g);
+    });
+
+    var pick = {};
+    pick[P[0].name] = 1;
+    pick[P[P.length - 1].name] = 1;
+    ["Novak Djokovic", "Jannik Sinner", "Carlos Alcaraz", "Daniil Medvedev", "Andrey Rublev"]
+      .forEach(function (n) { pick[n] = 1; });
+    P.forEach(function (p, i) {
+      if (!pick[p.name]) return;
+      svg.appendChild(el("text", { class: "plabel", x: padL - 10, y: padT + i * rowH + rowH / 2 + 3.5,
+        "text-anchor": "end" }, p.name));
+    });
+
+    svg.appendChild(el("line", { class: "me", x1: x(ME), x2: x(ME), y1: padT - 14, y2: H - padB + 4 }));
+    svg.appendChild(el("text", { class: "tick", x: x(ME), y: padT - 20, "text-anchor": "middle",
+      fill: "var(--crit)", "font-weight": "600" }, "나 " + fmt(ME) + "°"));
+    svg.appendChild(el("text", { class: "plabel", x: padL - 10, y: padT - 20, "text-anchor": "end" },
+      "선수 " + P.length + "명 (서브 20개 이상)"));
+  }
+
+  /* ---------- 근거 2 — 지표별 분포 ---------- */
+  var LBL = { ok: "프로 범위", warn: "경계", crit: "분포 밖" };
+
+  function drawDist(svg, m) {
+    var W = widthOf(svg, 560), H = 62, top = 18, base = 44;
+    clear(svg);
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    function x(v) { return (v - m.lo) / (m.hi - m.lo) * W; }
+    var mx = Math.max.apply(null, m.hist), bw = W / m.hist.length;
+
+    m.hist.forEach(function (c, i) {
+      var h = c === 0 ? 0 : Math.max(1.5, c / mx * (base - top));
+      var g = el("g", {});
+      g.appendChild(el("rect", { class: "bar", x: i * bw + 0.6, y: base - h,
+        width: Math.max(0.8, bw - 1.2), height: h, rx: 1 }));
+      g.appendChild(el("rect", { x: i * bw, y: 0, width: bw, height: base, fill: "transparent" }));
+      var a = m.lo + (m.hi - m.lo) * i / m.hist.length, b = a + (m.hi - m.lo) / m.hist.length;
+      hoverable(g, "<span class='num'>" + fmt(a, 0) + "–" + fmt(b, 0) + "°</span><br>프로 <span class='num'>" +
+        c + "</span>서브");
+      svg.appendChild(g);
+    });
+
+    svg.appendChild(el("line", { class: "band", x1: x(m.p5), x2: x(m.p95), y1: base + 5, y2: base + 5 }));
+    svg.appendChild(el("line", { class: "mean", x1: x(m.mean), x2: x(m.mean), y1: top - 8, y2: base }));
+
+    svg.appendChild(el("circle", { cx: Math.max(6, Math.min(W - 6, x(m.prev))), cy: base + 5, r: 4,
+      fill: "none", stroke: "var(--ink-3)", "stroke-width": 1.5 }));
+
+    var ux = Math.max(1, Math.min(W - 1, x(m.user)));
+    svg.appendChild(el("line", { x1: ux, x2: ux, y1: top - 12, y2: base + 10,
+      stroke: "var(--" + m.band + ")", "stroke-width": 2 }));
+    svg.appendChild(el("text", { class: "mk", x: ux, y: top - 16,
+      "text-anchor": ux > W - 46 ? "end" : (ux < 46 ? "start" : "middle"),
+      fill: "var(--" + m.band + ")" }, fmt(m.user) + "°"));
+
+    svg.appendChild(el("text", { class: "axis", x: 0, y: H - 2 }, fmt(m.lo, 0) + "°"));
+    svg.appendChild(el("text", { class: "axis", x: W, y: H - 2, "text-anchor": "end" }, fmt(m.hi, 0) + "°"));
+    svg.appendChild(el("text", { class: "axis", x: x(m.p5), y: H - 2, "text-anchor": "middle" }, "5%"));
+    svg.appendChild(el("text", { class: "axis", x: x(m.p95), y: H - 2, "text-anchor": "middle" }, "95%"));
+  }
+
+  function buildMetrics() {
+    var wrap = document.getElementById("metrics");
+    var order = { crit: 0, warn: 1, ok: 2 };
+    var ms = D.metrics.slice().sort(function (a, b) {
+      return (order[a.band] - order[b.band]) || (Math.abs(b.z) - Math.abs(a.z));
+    });
+    ms.forEach(function (m) {
+      var row = document.createElement("div");
+      row.className = "mrow";
+      row.innerHTML =
+        '<div><div class="mname"></div><div class="mdesc"></div></div>' +
+        '<div class="chartcell"></div>' +
+        '<div class="mnum"><div class="u"></div>' +
+        '<div class="p">프로 <span class="num mean"></span></div>' +
+        '<div class="p"><span class="pill"></span></div></div>';
+      row.querySelector(".mname").textContent = m.name;
+      row.querySelector(".mdesc").textContent = m.desc;
+      row.querySelector(".u").textContent = fmt(m.user) + "°";
+      row.querySelector(".mean").textContent = fmt(m.mean) + "±" + fmt(m.sd);
+      var pill = row.querySelector(".pill");
+      pill.className = "pill " + m.band;
+      pill.textContent = LBL[m.band] + " " + fmt(m.pct) + "%";
+      var svg = el("svg", { class: "dist" });
+      row.querySelector(".chartcell").appendChild(svg);
+      m._svg = svg;
+      wrap.appendChild(row);
+    });
+  }
+
+  /* ---------- 근거 3 — 자세 ---------- */
+  var phase = "impact";
+  var view = "side";
+
+  function drawPose(id, pts, bones, thick) {
+    var svg = document.getElementById(id);
+    clear(svg);
+    var W = 220, H = 260, pad = 20;
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    var xs = pts.map(function (p) { return p[0]; }), ys = pts.map(function (p) { return p[1]; });
+    var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs);
+    var y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
+    var s = Math.min((W - 2 * pad) / Math.max(0.6, x1 - x0), (H - 2 * pad) / Math.max(0.6, y1 - y0));
+    var cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+    function X(v) { return W / 2 + (v - cx) * s; }
+    function Y(v) { return H / 2 - (v - cy) * s; }
+
+    svg.appendChild(el("line", { x1: 12, x2: W - 12, y1: Y(y0), y2: Y(y0),
+      stroke: "var(--line)", "stroke-width": 1, "stroke-dasharray": "3 4" }));
+
+    bones.forEach(function (b) {
+      var i = b[0], j = b[1];
+      var key = thick.indexOf(i) >= 0 && thick.indexOf(j) >= 0;
+      svg.appendChild(el("line", {
+        x1: X(pts[i][0]), y1: Y(pts[i][1]), x2: X(pts[j][0]), y2: Y(pts[j][1]),
+        stroke: key ? "var(--court)" : (b[2] === "L" ? "var(--dist-2)" : "var(--ink-2)"),
+        "stroke-width": key ? 4 : 2.4, "stroke-linecap": "round"
+      }));
+    });
+    pts.forEach(function (p) {
+      svg.appendChild(el("circle", { cx: X(p[0]), cy: Y(p[1]), r: 2.5,
+        fill: "var(--surface)", stroke: "var(--ink-2)", "stroke-width": 1.2 }));
+    });
+  }
+
+  /* --- 두 규약(H36M / COCO)의 대응 관절. 겹쳐보기의 연결선은 이 짝을 잇는다. --- */
+  var PAIRS = [
+    [6, 14, "오른 어깨"], [8, 15, "오른 팔꿈치"], [10, 16, "오른 손목"],
+    [5, 11, "왼 어깨"], [7, 12, "왼 팔꿈치"], [9, 13, "왼 손목"],
+    [12, 1, "오른 고관절"], [14, 2, "오른 무릎"], [16, 3, "오른 발목"],
+    [11, 4, "왼 고관절"], [13, 5, "왼 무릎"], [15, 6, "왼 발목"]
+  ];
+  /* 머리는 뺐다 — 내 쪽은 코(COCO 0), 프로 쪽은 정수리(H36M 10)라 서로 다른 지점이다. */
+
+  /* 운동사슬 — 오른 발목에서 오른 손목까지. 서브는 이 선이 곧게 펴지면서 때리는 동작이다.
+     골반/흉추는 사슬에서 뺐다. 몸통은 원래 발목-손목 직선 위에 있지 않아 항상 크게 벗어나고,
+     그러면 정작 다리와 팔의 차이가 그 값에 묻힌다. */
+  var CHAIN_PRO = [3, 2, 1, 14, 15, 16];
+  var CHAIN_ME = [16, 14, 12, 6, 8, 10];
+  var CHAIN_LBL = ["발목", "무릎", "고관절", "어깨", "팔꿈치", "손목"];
+
+  function mid(p, a, b) { return [(p[a][0] + p[b][0]) / 2, (p[a][1] + p[b][1]) / 2]; }
+  function sub(a, b) { return [a[0] - b[0], a[1] - b[1]]; }
+  function len(v) { return Math.sqrt(v[0] * v[0] + v[1] * v[1]); }
+
+  /* 골반을 원점에, 몸통 길이를 1로. 두 규약을 같은 자 위에 올린다. */
+  function norm(pts, hip, sh) {
+    var t = Math.max(1e-6, len(sub(sh, hip)));
+    return pts.map(function (q) { return [(q[0] - hip[0]) / t, (q[1] - hip[1]) / t]; });
+  }
+  function normPro(p) { return norm(p, p[0], p[8]); }
+  function normMe(p) { return norm(p, mid(p, 11, 12), mid(p, 5, 6)); }
+
+  function poseData() {
+    var pro = normPro(D.poses[phase === "trophy" ? "pro_trophy" : "pro_impact"]);
+    var me = normMe(D.poses[phase === "trophy" ? "user_trophy" : "user_impact"]);
+    return { pro: pro, me: me };
+  }
+  function chainPts(pts, idx) {
+    return idx.map(function (i) {
+      return i === "hip" ? mid(pts, 11, 12) : (i === "sh" ? mid(pts, 5, 6) : pts[i]);
+    });
+  }
+
+  /* 두 골격이 함께 들어가는 화면 변환 */
+  function fitter(all, W, H, pad) {
+    var xs = all.map(function (p) { return p[0]; }), ys = all.map(function (p) { return p[1]; });
+    var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs);
+    var y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
+    var s = Math.min((W - 2 * pad) / Math.max(0.6, x1 - x0), (H - 2 * pad) / Math.max(0.6, y1 - y0));
+    var cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+    return {
+      s: s, y0: y0,
+      X: function (v) { return W / 2 + (v - cx) * s; },
+      Y: function (v) { return H / 2 - (v - cy) * s; }
+    };
+  }
+
+  /* ---------- 겹쳐보기: 두 골격 + 관절끼리 연결선 ---------- */
+  function drawOverlay() {
+    var svg = document.getElementById("overlay");
+    var W = Math.max(360, widthOf(svg, 760)), H = 360;
+    clear(svg);
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    var P = poseData(), pro = P.pro, me = P.me;
+    var f = fitter(pro.concat(me), W, H, 40);
+
+    svg.appendChild(el("line", { x1: 14, x2: W - 14, y1: f.Y(f.y0), y2: f.Y(f.y0),
+      stroke: "var(--line)", "stroke-width": 1, "stroke-dasharray": "3 4" }));
+
+    D.poses.h36m_bones.forEach(function (b) {
+      svg.appendChild(el("line", { class: "probone", x1: f.X(pro[b[0]][0]), y1: f.Y(pro[b[0]][1]),
+        x2: f.X(pro[b[1]][0]), y2: f.Y(pro[b[1]][1]) }));
+    });
+
+    /* 어긋난 양(몸통 길이 대비). 연결선 굵기와 색이 여기서 나온다. */
+    var devs = PAIRS.map(function (pr) {
+      return { name: pr[2], a: me[pr[0]], b: pro[pr[1]], d: len(sub(me[pr[0]], pro[pr[1]])) };
+    }).sort(function (x, y) { return y.d - x.d; });
+    var top = devs.slice(0, 3);
+
+    devs.forEach(function (v) {
+      var big = top.indexOf(v) >= 0 && v.d > 0.12;
+      var g = el("g", {});
+      g.appendChild(el("line", { class: "link" + (big ? " big" : ""), x1: f.X(v.a[0]), y1: f.Y(v.a[1]),
+        x2: f.X(v.b[0]), y2: f.Y(v.b[1]), "stroke-width": Math.min(3.2, 0.9 + v.d * 5) }));
+      g.appendChild(el("circle", { cx: f.X(v.b[0]), cy: f.Y(v.b[1]), r: 3,
+        fill: "var(--surface)", stroke: "var(--dist-2)", "stroke-width": 1.4 }));
+      hoverable(g, "<b>" + v.name + "</b><br><span class='num'>어긋난 거리 " +
+        fmt(v.d * 100, 0) + "% (몸통 길이 대비)</span>");
+      svg.appendChild(g);
+    });
+
+    var keyBones = phase === "impact" ? [[12, 14], [14, 16]] : [[6, 8], [8, 10]];
+    D.poses.coco_bones.forEach(function (b) {
+      var key = keyBones.some(function (k) { return k[0] === b[0] && k[1] === b[1]; });
+      svg.appendChild(el("line", { class: "mybone" + (key ? " key" : ""),
+        x1: f.X(me[b[0]][0]), y1: f.Y(me[b[0]][1]), x2: f.X(me[b[1]][0]), y2: f.Y(me[b[1]][1]) }));
+    });
+    PAIRS.forEach(function (pr) {
+      svg.appendChild(el("circle", { cx: f.X(me[pr[0]][0]), cy: f.Y(me[pr[0]][1]), r: 3.2,
+        fill: "var(--surface)", stroke: "var(--court)", "stroke-width": 1.6 }));
+    });
+
+    var wrap = document.getElementById("devs");
+    wrap.innerHTML = "";
+    top.forEach(function (v) {
+      var d = document.createElement("div");
+      d.className = "d";
+      d.innerHTML = "<span></span><b></b>";
+      d.querySelector("span").textContent = v.name;
+      d.querySelector("b").textContent = "몸통의 " + fmt(v.d * 100, 0) + "%";
+      wrap.appendChild(d);
+    });
+    document.getElementById("over-cap").textContent =
+      "점선 = 대응 관절을 이은 선, 길수록 많이 어긋난 것";
+  }
+
+  /* ---------- 펴짐 선: 발목→손목 사슬이 얼마나 곧은가 ---------- */
+  function drawChain() {
+    var svg = document.getElementById("overlay");
+    var W = Math.max(360, widthOf(svg, 760)), H = 360;
+    clear(svg);
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    var P = poseData();
+    var cp = chainPts(P.pro, CHAIN_PRO), cm = chainPts(P.me, CHAIN_ME);
+    var gap = 1.15;
+    var L = cp.map(function (q) { return [q[0] - gap, q[1]]; });
+    var R = cm.map(function (q) { return [q[0] + gap, q[1]]; });
+    var f = fitter(L.concat(R), W, H, 44);
+
+    /* 발목-손목 직선에서 각 관절이 얼마나 벗어났는가 = 사슬이 꺾인 정도 */
+    function bow(c) {
+      var a = c[0], b = c[c.length - 1], v = sub(b, a), n = Math.max(1e-6, len(v));
+      return c.map(function (q) {
+        var w = sub(q, a);
+        var t = (w[0] * v[0] + w[1] * v[1]) / (n * n);
+        var foot = [a[0] + v[0] * t, a[1] + v[1] * t];
+        return { p: q, foot: foot, d: len(sub(q, foot)) };
+      });
+    }
+
+    [[L, "var(--dist-2)", "프로 중앙값", 3.2], [R, "var(--court)", "나", 3.6]].forEach(function (side) {
+      var c = side[0], col = side[1], name = side[2], wdt = side[3];
+      var bw = bow(c);
+      var worst = bw.reduce(function (a, b) { return b.d > a.d ? b : a; });
+
+      svg.appendChild(el("line", { class: "ref", x1: f.X(c[0][0]), y1: f.Y(c[0][1]),
+        x2: f.X(c[c.length - 1][0]), y2: f.Y(c[c.length - 1][1]) }));
+      bw.forEach(function (v, i) {
+        if (v.d < 0.02) return;
+        svg.appendChild(el("line", { x1: f.X(v.p[0]), y1: f.Y(v.p[1]),
+          x2: f.X(v.foot[0]), y2: f.Y(v.foot[1]),
+          stroke: v === worst ? "var(--crit)" : "var(--ink-3)", "stroke-width": v === worst ? 1.8 : 1,
+          "stroke-dasharray": v === worst ? "none" : "2 3" }));
+      });
+      for (var i = 0; i < c.length - 1; i++) {
+        svg.appendChild(el("line", { x1: f.X(c[i][0]), y1: f.Y(c[i][1]),
+          x2: f.X(c[i + 1][0]), y2: f.Y(c[i + 1][1]),
+          stroke: col, "stroke-width": wdt, "stroke-linecap": "round" }));
+      }
+      c.forEach(function (q, i) {
+        var g = el("g", {});
+        g.appendChild(el("circle", { cx: f.X(q[0]), cy: f.Y(q[1]), r: 3.4,
+          fill: "var(--surface)", stroke: col, "stroke-width": 1.6 }));
+        hoverable(g, "<b>" + name + " · " + CHAIN_LBL[i] + "</b><br><span class='num'>직선에서 " +
+          fmt(bw[i].d * 100, 0) + "% 벗어남</span>");
+        svg.appendChild(g);
+      });
+      var mx = (c[0][0] + c[c.length - 1][0]) / 2;
+      svg.appendChild(el("text", { class: "gcap", x: f.X(mx), y: 20, "text-anchor": "middle" }, name));
+      svg.appendChild(el("text", { class: "glabel", x: f.X(mx), y: H - 10, "text-anchor": "middle",
+        fill: worst.d > 0.16 ? "var(--crit)" : "var(--ink-2)" },
+        "최대 " + fmt(worst.d * 100, 0) + "% @ " + CHAIN_LBL[bw.indexOf(worst)]));
+    });
+
+    document.getElementById("devs").innerHTML = "";
+    document.getElementById("over-cap").textContent =
+      "점선 = 발목과 손목을 곧게 이은 기준선, 세로선 = 각 관절이 그 선에서 벗어난 양";
+  }
+
+  var NOTES = {
+    side: "중앙값 자세는 관절마다 따로 중앙값을 낸 합성이라 실제로 존재한 서브가 아닙니다. " +
+      "각도 판정의 근거는 위 분포이고, 이 그림은 그 차이를 눈으로 보기 위한 것입니다.",
+    over: "골반을 원점에, 몸통 길이를 1로 맞춰 포갠 것이라 위치와 체격 차이는 제거돼 있습니다. " +
+      "다만 프로는 H36M 17관절, 나는 COCO 17관절이라 어깨·고관절의 정의가 미세하게 달라, " +
+      "몸통의 5% 이하 차이는 규약 차이일 수 있습니다.",
+    chain: "발목에서 손목까지를 한 줄로 잇고, 그 양 끝을 곧게 이은 기준선에서 각 관절이 얼마나 " +
+      "벗어났는지를 세로선으로 그렸습니다. 완전히 뻗은 서브일수록 세로선이 짧습니다. " +
+      "좌우는 나란히 놓기 위해 떼어 놓은 것이고, 실제 위치 차이가 아닙니다."
+  };
+
+  function renderPose() {
+    var over = view !== "side";
+    document.getElementById("overwrap").style.display = over ? "" : "none";
+    document.getElementById("poserow").style.display = over ? "none" : "";
+    if (view === "over") drawOverlay();
+    else if (view === "chain") drawChain();
+    else {
+      var pro = D.poses[phase === "trophy" ? "pro_trophy" : "pro_impact"];
+      var me = D.poses[phase === "trophy" ? "user_trophy" : "user_impact"];
+      var coco = D.poses.coco_bones.map(function (b) {
+        var left = [5, 7, 9, 11, 13, 15].indexOf(b[0]) >= 0 && [5, 7, 9, 11, 13, 15].indexOf(b[1]) >= 0;
+        return [b[0], b[1], left ? "L" : "C"];
+      });
+      drawPose("pose-pro", pro, D.poses.h36m_bones, [8, 14, 15, 16]);
+      drawPose("pose-me", me, coco, [6, 8, 10]);
+    }
+    var m = phase === "trophy"
+      ? D.metrics.filter(function (x) { return x.key === "trophy_knee"; })[0] : KNEE;
+    document.getElementById("pose-frame").textContent =
+      (phase === "trophy" ? "트로피 f73" : "임팩트 f84") + " · 무릎 " + fmt(m.user) +
+      "° (프로 " + fmt(m.mean) + "±" + fmt(m.sd) + ", " + fmt(m.pct) + "%ile)";
+    document.getElementById("posenote").textContent = NOTES[view];
+    document.getElementById("poselegend").style.display = view === "side" ? "" : "none";
+    document.getElementById("poselegend-note").textContent = phase === "impact"
+      ? "굵은 파란 선 = 「칠 때 팔꿈치 펴짐」과 「칠 때 팔 들림」을 재는 구간"
+      : "굵은 파란 선 = 「앉았을 때 팔꿈치」를 재는 구간";
+  }
+
+  /* ---------- 근거 4 — z 프로필 꺾은선 ---------- */
+  function drawPar() {
+    var svg = document.getElementById("par");
+    var W = Math.max(560, widthOf(svg, 900)), H = 330;
+    var padL = 42, padR = 16, padT = 22, padB = 86;
+    clear(svg);
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    var K = S.keys;
+    var nk = S.players.slice().sort(function (a, b) { return a.dnk - b.dnk; })[0];
+    var zs = [S.me_z].concat(S.players.map(function (p) { return p.z; }));
+    var flat = [].concat.apply([], zs);
+    var lo = Math.min(-2.6, Math.min.apply(null, flat)), hi = Math.max(2.6, Math.max.apply(null, flat));
+    function x(i) { return padL + i * (W - padL - padR) / (K.length - 1); }
+    function y(v) { return padT + (hi - v) / (hi - lo) * (H - padT - padB); }
+
+    K.forEach(function (k, i) {
+      svg.appendChild(el("line", { class: "axl", x1: x(i), x2: x(i), y1: padT - 6, y2: H - padB + 4 }));
+      var name = (D.metrics.filter(function (m) { return m.key === k; })[0] || {}).name || k;
+      var t = el("text", { class: "cap", x: x(i), y: H - padB + 18, "text-anchor": "end",
+        transform: "rotate(-38 " + x(i) + " " + (H - padB + 18) + ")" }, name);
+      svg.appendChild(t);
+    });
+    svg.appendChild(el("line", { class: "zero", x1: padL, x2: W - padR, y1: y(0), y2: y(0) }));
+    [-2, -1, 1, 2].forEach(function (v) {
+      svg.appendChild(el("text", { class: "cap", x: padL - 8, y: y(v) + 3.5, "text-anchor": "end" },
+        "z " + (v > 0 ? "+" : "\u2212") + Math.abs(v)));
+    });
+    svg.appendChild(el("text", { class: "cap", x: padL - 8, y: y(0) + 3.5, "text-anchor": "end" }, "평균"));
+
+    function path(z) { return z.map(function (v, i) { return (i ? "L" : "M") + x(i) + " " + y(v); }).join(" "); }
+    S.players.forEach(function (p) {
+      if (p === nk) return;
+      var g = el("g", {});
+      g.appendChild(el("path", { class: "pl", d: path(p.z) }));
+      hoverable(g, "<b>" + p.name + "</b><br><span class='num'>서브 " + p.n + "개 · 평균 " +
+        fmt(p.speed, 0) + "km/h<br>나와의 거리 " + fmt(p.d, 2) + " (무릎 빼면 " + fmt(p.dnk, 2) + ")</span>");
+      svg.appendChild(g);
+    });
+    var gn = el("g", {});
+    gn.appendChild(el("path", { class: "pl near", d: path(nk.z) }));
+    hoverable(gn, "<b>" + nk.name + "</b> — 무릎을 빼면 가장 가까운 선수<br><span class='num'>거리 " +
+      fmt(nk.dnk, 2) + " · 평균 " + fmt(nk.speed, 0) + "km/h</span>");
+    svg.appendChild(gn);
+    var gm = el("g", {});
+    gm.appendChild(el("path", { class: "pl me", d: path(S.me_z) }));
+    S.me_z.forEach(function (v, i) {
+      gm.appendChild(el("circle", { cx: x(i), cy: y(v), r: 3, fill: "var(--crit)" }));
+    });
+    hoverable(gm, "<b>나 (seungju_another)</b><br><span class='num'>빨간 선이 프로 평균(0)에서 " +
+      "얼마나 떨어졌는지입니다</span>");
+    svg.appendChild(gm);
+
+    svg.appendChild(el("text", { class: "cap", x: W - padR, y: padT - 8, "text-anchor": "end",
+      fill: "var(--crit)", "font-weight": "600" }, "나"));
+    svg.appendChild(el("text", { class: "cap", x: W - padR - 22, y: padT - 8, "text-anchor": "end",
+      fill: "var(--court-2)", "font-weight": "600" }, nk.name));
+  }
+
+  function buildSim() {
+    var tb = document.getElementById("simtb");
+    var rows = S.players.slice(0, 5).concat([S.players[S.players.length - 1]]);
+    rows.forEach(function (p, i) {
+      var last = i === rows.length - 1;
+      var tr = document.createElement("tr");
+      if (p.name === "Andrey Rublev") tr.className = "hit";
+      tr.innerHTML = '<td class="name"></td><td class="n"></td><td class="n"></td>' +
+        '<td class="n"></td><td class="n"></td>';
+      var td = tr.querySelectorAll("td");
+      td[0].textContent = (last ? "가장 먼 선수 — " : (i + 1) + ". ") + p.name;
+      td[1].textContent = fmt(p.d, 2);
+      td[2].textContent = fmt(p.dnk, 2);
+      td[3].textContent = fmt(p.speed, 0) + " km/h";
+      td[4].textContent = p.n;
+      tb.appendChild(tr);
+    });
+  }
+
+  /* ---------- 변화 추적 ---------- */
+  function drawSlope(svg, m) {
+    var W = widthOf(svg, 440), H = 34, y = 17;
+    clear(svg);
+    svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+    var lo = Math.min(m.p5, m.user, m.prev) - 6, hi = Math.max(m.p95, m.user, m.prev) + 6;
+    function x(v) { return 8 + (v - lo) / (hi - lo) * (W - 16); }
+    svg.appendChild(el("line", { class: "track", x1: x(m.p5), x2: x(m.p95), y1: y, y2: y }));
+    svg.appendChild(el("line", { class: "move", x1: x(m.prev), x2: x(m.user), y1: y, y2: y }));
+    svg.appendChild(el("circle", { class: "from", cx: x(m.prev), cy: y, r: 4.5 }));
+    svg.appendChild(el("circle", { class: "to", cx: x(m.user), cy: y, r: 4.5 }));
+  }
+
+  function buildDeltas() {
+    var wrap = document.getElementById("deltas");
+    D.metrics.forEach(function (m) {
+      var dv = m.user - m.prev;
+      var row = document.createElement("div");
+      row.className = "drow";
+      row.innerHTML =
+        '<div><div class="mname"></div><div class="mdesc"></div></div>' +
+        '<div class="chartcell"></div>' +
+        '<div class="dnum"><b></b><br><span class="num pcts"></span> <span class="dd"></span></div>';
+      row.querySelector(".mname").textContent = m.name;
+      row.querySelector(".mdesc").textContent = "프로 " + fmt(m.mean) + "±" + fmt(m.sd) + "°";
+      row.querySelector("b").textContent = fmt(m.prev) + "° → " + fmt(m.user) + "°";
+      row.querySelector(".pcts").textContent = fmt(m.pct_prev) + "% → " + fmt(m.pct) + "%ile";
+      row.querySelector(".dd").textContent =
+        Math.abs(dv) < 0.05 ? "· 변화 없음" : "· " + (dv > 0 ? "+" : "") + fmt(dv) + "°";
+      var svg = el("svg", { class: "slope" });
+      row.querySelector(".chartcell").appendChild(svg);
+      hoverable(svg, "<b>" + m.name + "</b><br><span class='num'>이전 " + fmt(m.prev) + "° (" +
+        fmt(m.pct_prev) + "%ile)<br>현재 " + fmt(m.user) + "° (" + fmt(m.pct) + "%ile)<br>프로 5~95%: " +
+        fmt(m.p5, 0) + "~" + fmt(m.p95, 0) + "°</span>");
+      m._slope = svg;
+      wrap.appendChild(row);
+    });
+  }
+
+  /* ---------- render / resize ---------- */
+  function renderAll() {
+    drawTornado();
+    drawPlayers();
+    D.metrics.forEach(function (m) {
+      if (m._svg) drawDist(m._svg, m);
+      if (m._slope) drawSlope(m._slope, m);
+    });
+    renderPose();
+    drawPar();
+  }
+
+  buildMetrics();
+  buildDeltas();
+  buildTally();
+  buildScan();
+  buildNeed();
+  buildSim();
+  renderAll();
+
+  var t = 0;
+  window.addEventListener("resize", function () {
+    clearTimeout(t);
+    t = setTimeout(renderAll, 120);
+  });
+
+  /* ---------- controls ---------- */
+  var phaseBtns = document.querySelectorAll(".phase");
+  phaseBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      phase = b.dataset.phase;
+      phaseBtns.forEach(function (o) { o.setAttribute("aria-selected", String(o === b)); });
+      renderPose();
+    });
+  });
+
+  var viewBtns = document.querySelectorAll(".view");
+  viewBtns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      view = b.dataset.view;
+      viewBtns.forEach(function (o) { o.setAttribute("aria-selected", String(o === b)); });
+      renderPose();
+    });
+  });
+
+  var tabs = document.querySelectorAll("nav.tabs button");
+  tabs.forEach(function (b) {
+    b.addEventListener("click", function () {
+      tabs.forEach(function (o) { o.setAttribute("aria-selected", String(o === b)); });
+      document.querySelectorAll(".screen").forEach(function (s) {
+        s.classList.toggle("on", s.id === b.dataset.screen);
+      });
+      hideTip();
+      renderAll();
+      window.scrollTo(0, 0);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
