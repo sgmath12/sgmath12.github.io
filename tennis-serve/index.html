@@ -371,6 +371,66 @@
   table.scan td.a { font-family: var(--f-data); font-size: 12.5px; }
   table.scan tr.hit td { background: var(--crit-bg); }
   table.scan td.v { font-family: var(--f-data); }
+
+  /* ---------- 고치는 법 ---------- */
+  .fix { border: 1px solid var(--line); border-radius: var(--r); background: var(--surface);
+         box-shadow: var(--shadow); overflow: hidden; }
+  .fix + .fix { margin-top: 16px; }
+  .fix > header { display: grid; grid-template-columns: auto 1fr auto; gap: 14px;
+                  align-items: baseline; padding: 16px 20px; border-bottom: 1px solid var(--line-soft);
+                  background: var(--surface-2); }
+  .fix .rank { font-family: var(--f-data); font-size: 11px; font-weight: 600; letter-spacing: .1em;
+               text-transform: uppercase; color: var(--surface); background: var(--court);
+               padding: 4px 9px; border-radius: 99px; white-space: nowrap; }
+  :root[data-theme="dark"] .fix .rank,
+  :root:not([data-theme="light"]) .fix .rank { color: #07202F; }
+  .fix h3 { font-family: var(--f-display); font-size: 18px; font-weight: 700; margin: 0;
+            text-wrap: balance; }
+  .fix .now { font-family: var(--f-data); font-size: 12.5px; color: var(--ink-2); white-space: nowrap;
+              font-variant-numeric: tabular-nums; }
+  .fix .now b { color: var(--crit); }
+  .fix .body { display: grid; grid-template-columns: 1fr 1fr; }
+  .fix .body > div { padding: 18px 20px; }
+  .fix .body > div + div { border-left: 1px solid var(--line-soft); }
+  .fix .body > div.span { grid-column: 1 / -1; border-left: none;
+                          border-top: 1px solid var(--line-soft); }
+  .fix h4 { font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+            color: var(--ink-3); margin: 0 0 9px; }
+  .fix p { font-size: 14px; margin: 0 0 10px; max-width: 60ch; }
+  .fix p:last-child { margin-bottom: 0; }
+  .fix ol.drills { margin: 0; padding: 0; list-style: none; counter-reset: dr; display: grid; gap: 12px; }
+  .fix ol.drills li { counter-increment: dr; display: grid; grid-template-columns: 22px 1fr; gap: 11px;
+                      font-size: 14px; }
+  .fix ol.drills li::before { content: counter(dr); font-family: var(--f-data); font-size: 11px;
+                              font-weight: 600; color: var(--court-2); border: 1px solid var(--line);
+                              border-radius: 99px; width: 22px; height: 22px; display: grid;
+                              place-items: center; margin-top: 1px; }
+  .fix ol.drills b { font-weight: 600; }
+  .fix .cue { display: block; margin-top: 3px; font-family: var(--f-display); font-size: 15px;
+              color: var(--court); }
+  :root[data-theme="dark"] .fix .cue,
+  :root:not([data-theme="light"]) .fix .cue { color: var(--court); }
+  .fix .check { background: var(--surface-2); }
+  .fix .check p { color: var(--ink-2); font-size: 13.5px; }
+  .keep { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px;
+          background: var(--line); border: 1px solid var(--line); border-radius: var(--r);
+          overflow: hidden; }
+  .keep > div { background: var(--surface); padding: 13px 15px; }
+  .keep .n2 { font-family: var(--f-data); font-weight: 600; font-size: 15px; color: var(--ok); }
+  .keep .l { font-size: 12.5px; margin-top: 2px; }
+  /* ---------- 용어 ---------- */
+  .terms { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1px;
+           background: var(--line); border: 1px solid var(--line); border-radius: var(--r);
+           overflow: hidden; }
+  .terms > div { background: var(--surface); padding: 14px 16px; }
+  .terms dt { font-family: var(--f-data); font-weight: 600; font-size: 13px; color: var(--court); }
+  .terms dd { margin: 4px 0 0; font-size: 12.5px; color: var(--ink-2); line-height: 1.5; }
+  @media (max-width: 860px) {
+    .fix .body { grid-template-columns: 1fr; }
+    .fix .body > div + div { border-left: none; border-top: 1px solid var(--line-soft); }
+    .fix > header { grid-template-columns: 1fr; gap: 6px; }
+    .fix .rank { justify-self: start; }
+  }
 </style>
 
 <div class="wrap">
@@ -387,7 +447,8 @@
   <section class="screen on" id="report" role="tabpanel">
     <div class="hero">
       <div class="eyebrow">분석 리포트 · 2026-08-29</div>
-      <h1>고칠 곳은 하나입니다 — 때리는 순간 다리가 덜 펴집니다</h1>
+      <h1>뛰지 않고, 서서 치고 있습니다</h1>
+      <p class="lead" style="margin-top:12px">때리는 순간 무릎이 <b class="hl">157°</b>로 아직 굽어 있고(프로 173°), 두 다리는 <b class="hl">7°</b>밖에 벌어지지 않습니다(프로 31°). 준비 동작은 전부 정상입니다 — <b class="hl">마지막에 다리로 밀어 올리는 한 가지만</b> 빠져 있습니다.</p>
       <div class="chips">
         <div class="chip"><i>영상</i><b>seungju_another</b></div>
         <div class="chip"><i>길이</i><b class="num">125프레임 / 30fps</b></div>
@@ -447,6 +508,191 @@
         <div class="fignote">
           막대에 마우스를 올리면 실제 각도와 백분위가 나옵니다. 아래 ‘근거 1~4’가 이 판정의 근거입니다.
         </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">읽는 법</div>
+      <div class="terms">
+        <div><dt>백분위 (%ile)</dt><dd>프로 3,149서브 중 나보다 낮은 값이 몇 %인지. 50%면 딱 한가운데,
+          5% 아래면 프로가 거의 그렇게 하지 않는 자세입니다.</dd></div>
+        <div><dt>z</dt><dd>프로 평균에서 몇 걸음 떨어졌는지. 한 걸음(1)의 크기는 지표마다 다르고,
+          아래 ±SD가 그 걸음 폭입니다.</dd></div>
+        <div><dt>±SD</dt><dd>프로들이 그 값에서 흩어진 폭. <b class="hl">작을수록 프로가 엄격히 지키는
+          규칙</b>이라, 같은 10° 차이도 훨씬 무겁게 읽힙니다.</dd></div>
+        <div><dt>각도 180°</dt><dd>관절이 완전히 펴진 상태. 무릎 180° = 다리가 일직선,
+          90° = 직각으로 굽음.</dd></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">고치는 법</div>
+      <h2>세 가지를 순서대로, 한 번에 하나씩</h2>
+      <p class="lead">
+        아래 순서는 <b class="hl">고치기 쉬운 순</b>이 아니라 <b class="hl">다른 것을 끌고 오는 순</b>입니다.
+        1번이 해결되면 2·3번은 절로 따라오는 경우가 많습니다. 반대로 3번부터 손대면 1번이 그대로 남습니다.
+      </p>
+
+      <div class="fix">
+        <header>
+          <span class="rank">1순위</span>
+          <h3>서서 치지 말고, 뛰어서 치기</h3>
+          <span class="now">무릎 <b>157°</b> → 목표 170°+</span>
+        </header>
+        <div class="body">
+          <div>
+            <h4>지금 무슨 일이 벌어지나</h4>
+            <p>공을 때리는 순간에도 무릎이 <b class="hl">157°</b>로 아직 굽어 있습니다(프로 173°).
+              그리고 두 다리가 <b class="hl">7°</b>밖에 안 벌어져 거의 붙어 있습니다(프로 31°).</p>
+            <p>두 숫자를 합치면 그림이 하나로 모입니다 — <b class="hl">덜 편 게 아니라 뛰지 않은 것</b>입니다.
+              프로는 뒷다리로 밀어 올려 공중에 뜬 상태에서, 앞다리가 뒤로 차올라 가위처럼 벌어진 채
+              공을 맞힙니다. 나는 두 발이 땅에 붙은 채 팔로만 치고 있습니다.</p>
+          </div>
+          <div>
+            <h4>해보세요</h4>
+            <ol class="drills">
+              <li><div><b>토스만 하고 점프, 안 치기</b> — 20회. 토스 → 다리로 밀어 올려 점프 →
+                라켓은 그대로 두고 착지. 때리려는 욕심이 빠지면 다리가 살아납니다.
+                <span class="cue">“공을 치지 말고, 공까지 올라가 보세요.”</span></div></li>
+              <li><div><b>둘 세고 펴기</b> — 트로피 자세에서 <b>“하나”</b>에 멈췄다가
+                <b>“둘”</b>에 다리만 펴서 뜁니다. 라켓·공 없이 10회.
+                <span class="cue">“앉는 건 이미 잘 하고 있어요. 일어나는 걸 따로 연습하세요.”</span></div></li>
+              <li><div><b>토스를 반 라켓 더 높이</b> — 토스가 낮으면 내려오는 공을 쫓느라
+                다리 펼 시간이 없습니다. 다리가 안 펴지는 원인이 다리가 아니라 토스인 경우가 많습니다.
+                <span class="cue">“높이 올리고, 기다렸다 올라가서 치세요.”</span></div></li>
+            </ol>
+          </div>
+          <div class="span">
+            <h4>왜 이걸 해야 하나</h4>
+            <p><b class="hl">타점이 높아집니다.</b> 이건 기하학이라 확실합니다 — 같은 힘으로 쳐도 접점이
+              높으면 네트 위 여유가 커지고, 서비스 박스로 꽂히는 각도가 생깁니다. 낮은 타점에서는
+              네트를 넘기려 살살 칠 수밖에 없습니다.</p>
+            <p><b class="hl">팔이 할 일이 줄어듭니다.</b> 서브는 다리에서 시작해 몸통·어깨를 지나 라켓으로
+              전달되는 동작입니다. 출발점인 다리가 빠지면 그 몫을 팔이 대신 떠안습니다.
+              힘을 더 쓰는데 공은 안 빨라지는 상태가 여기서 나옵니다.</p>
+          </div>
+          <div class="span check">
+            <h4>혼자 확인하는 법 — 장비 없이</h4>
+            <p><b>서브를 치고 앞발이 어디에 떨어지는지 보세요.</b> 프로는 베이스라인 <b>안쪽</b>에 착지합니다.
+              친 자리에 그대로 서 있다면 뛰지 않은 것이고, 이 항목은 아직 그대로입니다.
+              발자국을 보려면 클레이코트나 젖은 하드코트가 편합니다. 이 하나만으로도 판정됩니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fix">
+        <header>
+          <span class="rank">2순위</span>
+          <h3>칠 때 왼팔을 몸으로 당겨 접기</h3>
+          <span class="now">왼 팔꿈치 <b>144°</b> → 목표 100° 안팎</span>
+        </header>
+        <div class="body">
+          <div>
+            <h4>지금 무슨 일이 벌어지나</h4>
+            <p>때리는 순간 왼팔이 <b class="hl">144°</b>로 거의 펴진 채 공중에 떠 있습니다.
+              프로는 <b class="hl">97°</b> — 팔꿈치를 접어 몸쪽으로 당겨 붙입니다.
+              상위 14% 안에 들 만큼 안 접는 편입니다.</p>
+            <p>토스한 왼팔을 그냥 “놔둔” 상태입니다. 프로에게 왼팔은 던지고 끝나는 팔이 아니라,
+              던진 다음 <b class="hl">몸통을 돌리는 데 쓰는 팔</b>입니다.</p>
+          </div>
+          <div>
+            <h4>해보세요</h4>
+            <ol class="drills">
+              <li><div><b>왼 주먹으로 옆구리 치기</b> — 때리는 순간 왼 주먹이 왼쪽 갈비뼈에 <b>닿아야</b> 합니다.
+                닿는 감각을 목표로 삼으세요. 각도를 재는 것보다 훨씬 쉽습니다.
+                <span class="cue">“왼손으로 옆구리를 툭 친다고 생각하세요.”</span></div></li>
+              <li><div><b>왼팔만 따로</b> — 라켓 없이, 오른팔은 신경 쓰지 말고 왼팔만 20회.
+                올렸다가 → 접어 당기기. 몸이 저절로 도는 게 느껴지면 맞게 하는 겁니다.</div></li>
+            </ol>
+          </div>
+          <div class="span">
+            <h4>왜 이걸 해야 하나</h4>
+            <p><b class="hl">몸통이 저절로 빨리 돕니다.</b> 피겨스케이팅에서 팔을 오므리면 회전이 빨라지는
+              것과 같은 원리입니다 — 팔을 몸 가까이 당기면 돌리기 어려운 정도(회전 관성)가 줄어들어,
+              같은 힘으로도 더 빨리 돌아갑니다. 왼팔을 편 채 두면 그 반대가 됩니다.</p>
+            <p><b class="hl">몸이 일찍 열리는 것을 막아줍니다.</b> 왼팔이 벌어진 채로 있으면 상체가
+              먼저 정면을 향해 버려서, 라켓이 따라오기 전에 회전이 끝납니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fix">
+        <header>
+          <span class="rank">3순위</span>
+          <h3>토스한 왼팔을 더 오래 세워두기</h3>
+          <span class="now">토스 팔 <b>140°</b> → 목표 160°+</span>
+        </header>
+        <div class="body">
+          <div>
+            <h4>지금 무슨 일이 벌어지나</h4>
+            <p>트로피 자세(가장 깊게 앉은 순간)에서 왼팔이 <b class="hl">140°</b>까지밖에 안 올라가 있습니다.
+              프로는 <b class="hl">163°</b>로 거의 수직에 가깝게 세워둡니다. 하위 3.2%입니다.</p>
+            <p>토스를 하고 팔을 <b class="hl">바로 내려버리는</b> 것입니다.</p>
+          </div>
+          <div>
+            <h4>해보세요</h4>
+            <ol class="drills">
+              <li><div><b>공을 계속 가리키기</b> — 토스한 뒤 왼손 손끝으로 공을 <b>따라가며 가리킵니다.</b>
+                앉았다가 일어나 칠 때까지 그대로.
+                <span class="cue">“던지고 손을 내리지 말고, 공을 가리킨 채 앉으세요.”</span></div></li>
+              <li><div><b>트로피 정지 3초</b> — 토스 없이, 트로피 자세를 만들고 3초 버팁니다. 10회.
+                왼팔이 귀 옆까지 올라가 있는지 거울이나 그림자로 확인하세요.</div></li>
+            </ol>
+          </div>
+          <div class="span">
+            <h4>왜 이걸 해야 하나</h4>
+            <p><b class="hl">어깨선이 기울어야 라켓이 떨어질 자리가 생깁니다.</b> 왼팔을 높이 세워두면
+              어깨선이 기울면서 오른 어깨가 뒤·아래로 내려갑니다. 라켓을 등 뒤로 떨어뜨릴 공간이
+              거기서 만들어집니다. 왼팔을 일찍 내리면 어깨선이 평평해지고, 그 공간이 사라집니다.</p>
+            <p>그래서 이 항목은 <b class="hl">2순위와 짝</b>입니다. 헷갈리기 쉬운데 시점이 다릅니다 —
+              <b class="hl">앉을 때는 세워두고, 칠 때는 당겨 접습니다.</b> 계속 세워두는 것도,
+              처음부터 내리는 것도 아닙니다.</p>
+          </div>
+        </div>
+      </div>
+      <div class="note">
+        <p style="margin:0 0 10px">
+          <b class="hl">한 번에 하나만 하세요.</b> 서브는 동작이 사슬처럼 이어져 있어서 두 가지를 동시에
+          바꾸면, 좋아져도 나빠져도 <b class="hl">어느 쪽 때문인지 알 수 없습니다.</b> 다시 찍어 재도
+          원인이 분리되지 않습니다.
+        </p>
+        <p style="margin:0">
+          1순위를 <b class="hl">2~3주</b> 잡고, 앞발 착지 위치가 베이스라인 안쪽으로 안정되면
+          그때 2순위로 넘어가세요. 다시 찍을 때는 앞의 ‘다음에 할 것’대로
+          <b class="hl">같은 자리에서 20개를 몰아서</b> 찍으면 됩니다.
+        </p>
+      </div>
+      <div class="warnbox">
+        <h3>드릴은 측정 결과가 아니라 일반적인 코칭 방법입니다</h3>
+        <p style="margin:8px 0 0; font-size:13.5px; color:var(--ink-2)">
+          이 리포트가 측정한 것은 <b class="hl">“프로와 어디가 다른가”까지</b>입니다. 위 드릴과 큐는
+          그 차이를 좁히는 데 흔히 쓰이는 방법이지, 이 데이터에서 도출된 것이 아닙니다.
+          몸이 다르면 맞는 방법도 다르니, 코치가 있다면 <b class="hl">측정 결과를 보여주고 방법은
+          코치와 정하는 편</b>이 낫습니다.
+        </p>
+        <p style="margin:10px 0 0; font-size:13.5px; color:var(--ink-2)">
+          <b class="hl">“고치면 공이 빨라진다”고는 쓰지 않았습니다.</b> 프로 2,216개의 퍼스트 서브에서
+          같은 선수 안의 편차만 놓고 보면, 이 리포트의 지표들과 구속의 상관은 전부
+          <b class="hl">|r| &lt; 0.06</b>으로 사실상 0이었습니다(3D 지표 15개를 더 만들어 재도 같았습니다).
+          그래서 근거는 “빨라진다”가 아니라 <b class="hl">“프로가 예외 없이 그렇게 한다”</b>입니다.
+          부상 위험에 관한 언급은 의학적 소견이 아닙니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="eyebrow">건드리지 말 것</div>
+      <h2>다섯 가지는 이미 프로 한복판입니다</h2>
+      <p class="lead">
+        고치려다 오히려 망가지는 쪽입니다. 특히 <b class="hl">앉는 깊이는 프로마다 51°까지 차이가 납니다</b> —
+        시너 85°, 조코비치 136°. 얼마나 깊게 앉을지는 취향의 영역이고, 지금 값은 정상 범위입니다.
+      </p>
+      <div class="keep">
+        <div><div class="n2">63%ile</div><div class="l">앉았을 때 무릎 굽힘</div></div>
+        <div><div class="n2">38%ile</div><div class="l">앉았다 펴는 양</div></div>
+        <div><div class="n2">38%ile</div><div class="l">토스 팔 펴짐</div></div>
+        <div><div class="n2">37%ile</div><div class="l">상체 젖힘</div></div>
+        <div><div class="n2">63%ile</div><div class="l">칠 때 팔꿈치 펴짐</div></div>
       </div>
     </section>
 
@@ -760,6 +1006,12 @@
         시점 추정에 ±10° 오차가 있고, 3D 복원 정밀도의 한계로 5° 이하 차이는 의미가 없습니다.
         공 속도·회전·코스, 부상 위험은 측정하지 않으며 의학적 소견이 아닙니다.
         <b>‘영상 접수’ 탭은 UI 시안이고, 리포트·변화추적 탭의 수치는 실측값입니다.</b>
+      </p>
+      <p>
+        <b>측정과 처방의 구분</b> · 이 리포트가 데이터로 말할 수 있는 것은 “프로 분포에서 어디가
+        얼마나 다른가”까지입니다. ‘고치는 법’의 드릴과 큐는 그 차이를 좁히는 데 쓰이는 일반적인
+        코칭 방법이며, 이 데이터에서 도출된 것이 아닙니다. 프로 2,216 퍼스트 서브에서 선수 내
+        편차로 본 지표–구속 상관은 모두 |r| &lt; 0.06 이라, “고치면 빨라진다”는 주장은 하지 않습니다.
       </p>
     </div>
   </section>
