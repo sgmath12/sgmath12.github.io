@@ -431,6 +431,29 @@
     .fix > header { grid-template-columns: 1fr; gap: 6px; }
     .fix .rank { justify-self: start; }
   }
+
+  /* ---------- 코치 노트 ---------- */
+  .coach { max-width: 60ch; }
+  .coach p { font-size: 16.5px; line-height: 1.78; margin: 0 0 18px; max-width: none; }
+  .coach p b { font-weight: 600; }
+  .coach .open { font-size: 17.5px; }
+  .coach .hit { font-family: var(--f-display); font-size: 19px; line-height: 1.65;
+                border-left: 3px solid var(--court); padding: 4px 0 4px 20px; margin: 26px 0; }
+  .coach .close { color: var(--ink-2); font-size: 15.5px; padding-top: 6px;
+                  border-top: 1px solid var(--line-soft); margin-top: 26px; }
+  details.numbers { margin-top: 26px; border: 1px solid var(--line); border-radius: var(--r);
+                    background: var(--surface); }
+  details.numbers summary { cursor: pointer; padding: 13px 18px; font-size: 13px; font-weight: 600;
+                            color: var(--ink-2); list-style: none; display: flex; gap: 9px;
+                            align-items: center; }
+  details.numbers summary::-webkit-details-marker { display: none; }
+  details.numbers summary::before { content: "+"; font-family: var(--f-data); color: var(--court-2);
+                                    font-size: 15px; line-height: 1; }
+  details.numbers[open] summary::before { content: "\2212"; }
+  details.numbers summary:focus-visible { outline: 2px solid var(--court-2); outline-offset: -2px; }
+  details.numbers > div { padding: 4px 18px 16px; border-top: 1px solid var(--line-soft); }
+  details.numbers p { font-size: 13.5px; color: var(--ink-2); margin: 12px 0 0; }
+  details.numbers p b { color: var(--ink); }
 </style>
 
 <div class="wrap">
@@ -961,35 +984,73 @@
 
     <section class="block">
       <div class="eyebrow">코치 노트</div>
-      <h2>펴는 게 아니라, 끝까지 밀어 올리는 것</h2>
-      <p>
-        검증된 열 지표 중 여섯은 프로 범위 한복판입니다 — 앉았을 때 무릎(63%ile), 앉았다 펴는 양(38%),
-        토스 팔 폄(38%), 상체 젖힘(37%), 칠 때 팔꿈치 폄(63%), 앉았을 때 팔꿈치(28%).
-        <b class="hl">여기는 지금 손댈 곳이 아닙니다.</b>
-      </p>
-      <p>
-        문제는 <b class="hl">칠 때 무릎 157.4°</b>(프로 173.0±8.2, 하위 4.3%)이고, 같은 방향으로
-        <b class="hl">토스 팔 들림 139.7°</b>(프로 163.0±20.8, 하위 3.2%)와
-        <b class="hl">칠 때 팔 들림 122.3°</b>(프로 140.0±22.3, 하위 12%)가 따라옵니다.
-        셋 다 “어깨와 고관절에서 끝까지 밀어 올리지 않는다”는 한 가지 얘기입니다.
-      </p>
-      <p>
-        무릎 항목은 프로들 사이 편차가 ±8.2°로 유난히 좁습니다. 다른 항목이 ±20~50°인 걸 생각하면
-        프로라면 대체로 지키는 규칙이라는 뜻이고, 그래서 15.6° 차이가 크게 읽힙니다.
-        <b class="hl">접는 양은 이미 충분합니다</b> — 접었다가 끝까지 밀어 올리지 않은 채 때리는 것이 문제입니다.
-      </p>
-      <p>
-        팔도 같습니다. 팔꿈치는 잘 폈는데(63%ile) 어깨에서 들어올리는 쪽이 양팔 모두 부족합니다(12%, 3.2%).
-        펴는 것과 들어올리는 것은 다른 동작이고, 지금 모자란 쪽은 들어올리기입니다.
-        이전 폼 영상에서도 무릎이 158.6°(하위 4.9%)로 같은 값이라, 측정 잡음이 아니라 몸에 밴 습관으로 보입니다.
-      </p>
-      <div class="note">
-        <p style="margin:0">
-          다만 <b class="hl">앉는 깊이는 프로마다 제각각입니다.</b> 트로피 무릎의 프로 분포는 111.5±22.2°로
-          폭이 넓습니다(5~95%: 84.5°~153.7°). 얼마나 깊게 앉을지는 취향의 영역이고,
-          끝까지 펴는 것만 공통 규칙입니다.
+      <h2>잘 앉았는데, 그대로 서서 칩니다</h2>
+
+      <div class="coach">
+        <p class="open">
+          영상 보니까 <b>준비 동작은 좋습니다.</b> 무릎 잘 접고, 상체 잘 젖히고, 토스도 안정적이에요.
+          여기까지는 손댈 게 없습니다. 문제는 딱 마지막입니다.
+        </p>
+
+        <p>
+          프로 서브를 옆에서 보면, 때리는 순간 <b>몸이 공중에 떠 있습니다.</b> 뒷발로 땅을 밀고
+          앞발은 뒤로 차올라가 있어요. 그래서 두 다리가 가위처럼 벌어집니다.
+          지금 서브는 두 발이 땅에 붙어 있고, 다리가 거의 나란히 아래로 뻗어 있습니다.
+        </p>
+
+        <p class="hit">
+          그러니까 <b>덜 편 게 아니라, 안 뛴 겁니다.</b><br>
+          접는 건 이미 잘 하고 있으니 <b>펴는 걸</b> 연습할 게 아니라 <b>일어나서 뜨는 걸</b> 연습해야 합니다.
+        </p>
+
+        <p>
+          당장 오늘 코트에서 하나만 한다면 이겁니다 —
+          <b>서브 치고 나서 앞발이 어디 떨어지는지 보세요.</b> 코트 안쪽으로 들어가 있으면 뛴 겁니다.
+          친 자리에 그대로 서 있으면 아직입니다. 이거 하나면 카메라 없이도 매번 확인됩니다.
+        </p>
+
+        <p>
+          팔도 같은 얘기예요. <b>팔꿈치는 잘 폈습니다.</b> 근데 어깨에서 팔을 덜 올렸어요.
+          펴는 거랑 올리는 건 다른 동작입니다. 라켓으로 최대한 높은 데를 긁는다고 생각하세요.
+        </p>
+
+        <p>
+          왼팔은 두 군데서 놓치고 있습니다. <b>앉을 때는</b> 공을 계속 가리킨 채로 버텨야 하는데
+          던지자마자 내려버리고, <b>칠 때는</b> 옆구리로 당겨 접어야 하는데 편 채로 둡니다.
+          헷갈리기 쉬운데 순서가 있어요 — <b>세워뒀다가, 칠 때 당깁니다.</b>
+        </p>
+
+        <p>
+          하나만 더. <b>앉는 깊이는 신경 쓰지 마세요.</b> 시너는 아주 깊게 앉고 조코비치는 얕게 앉습니다.
+          둘 다 세계 최고예요. 얼마나 깊게 앉느냐는 취향입니다.
+          모두가 똑같이 지키는 건 <b>끝까지 밀어 올린다</b>는 것 하나뿐입니다.
+        </p>
+
+        <p class="close">
+          이전 영상에서도 똑같았습니다. 폼을 바꾸셨는데 이 습관만 그대로 남아 있어요.
+          우연이나 그날 컨디션이 아니라 <b>몸에 밴 것</b>이라, 의식하고 따로 연습하지 않으면
+          저절로는 안 없어집니다.
         </p>
       </div>
+
+      <details class="numbers">
+        <summary>위 얘기의 근거가 된 숫자 보기</summary>
+        <div>
+          <p><b>다리</b> — 임팩트 무릎 157.4° (프로 173.0±8.2, 하위 4.3%).
+            두 무릎이 벌어진 각 7.1° (프로 31.2±12.7, 하위 2.1%).
+            이전 폼에서도 158.6°로 같아 습관으로 봅니다.</p>
+          <p><b>무릎이 특히 무겁게 읽히는 이유</b> — 프로들 사이 편차가 ±8.2°로 유난히 좁습니다.
+            다른 항목이 ±20~50°인 걸 생각하면 프로라면 대체로 지키는 규칙이라는 뜻이고,
+            그래서 15.6° 차이가 크게 읽힙니다.</p>
+          <p><b>팔</b> — 칠 때 팔꿈치 펴짐 155.6° (63%ile, 정상)인데
+            칠 때 팔 들림은 122.3° (프로 140.0±22.3, 하위 12%).
+            펴는 것과 들어올리는 것이 갈립니다.</p>
+          <p><b>왼팔</b> — 트로피에서 토스 팔 들림 139.7° (프로 163.0±20.8, 하위 3.2%),
+            임팩트에서 토스 팔 접힘 143.9° (프로 97.5±39.7, 상위 14%).</p>
+          <p><b>앉는 깊이</b> — 트로피 무릎의 프로 분포가 111.5±22.2° (5~95%: 84.5~153.7°)로 매우 넓습니다.
+            내 값 114.8°는 63%ile로 한복판입니다.</p>
+        </div>
+      </details>
     </section>
 
     <div class="foot">
